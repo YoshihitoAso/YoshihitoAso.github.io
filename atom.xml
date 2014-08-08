@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-08T21:18:43+09:00</updated>
+  <updated>2014-08-08T21:23:04+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -14,11 +14,83 @@
 
   
   <entry>
-    <title type="html"><![CDATA[sample_page]]></title>
-    <link href="http://yoshihitoaso.github.io/blog/2014/08/08/sample-page/"/>
-    <updated>2014-08-08T20:23:34+09:00</updated>
-    <id>http://yoshihitoaso.github.io/blog/2014/08/08/sample-page</id>
-    <content type="html"><![CDATA[
+    <title type="html"><![CDATA[GitHub Pages + Octopress]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/08/github-pages-plus-octopress/"/>
+    <updated>2014-08-08T21:21:48+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/08/github-pages-plus-octopress</id>
+    <content type="html"><![CDATA[<h2>GitHub Pages + Octopress 設定手順</h2>
+
+<p>このへんとか、</p>
+
+<p><a href="http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/">OctopressでGitHub無料ブログ構築。sourceをBitbucket管理。簡単ガイド！ - 酒と泪とRubyとRails</a></p>
+
+<p>このへんとか、</p>
+
+<p><a href="http://qiita.com/syui/items/07365ed24eef63602233">GitHub Pages + Octopress カスタマイズ - Qiita</a></p>
+
+<p>を参考にした。</p>
+
+<h3>install</h3>
+
+<p>以下の手順でインストール&amp;deploy設定を行う</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone git@github.com:imathis/octopress.git YoshihitoAso.github.io
+</span><span class='line'>$ gem install bundler
+</span><span class='line'>
+</span><span class='line'>$ bundle install
+</span><span class='line'>$ bundle exec rake install
+</span><span class='line'>$ bundle exec rake setup_github_pages
+</span><span class='line'> Enter the read/write url for your repository: git@github.com: username/username.github.com.git
+</span><span class='line'> git@github.com:YoshihitoAso/YoshihitoAso.github.io.git</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>sample page</h3>
+
+<p>サンプルページを作ってみる</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake new_post['sample_page']</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でOK。すると、./source/_posts 配下に新しい *.markdown ファイルが出来ているはず。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake preview</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でプレビューを見る。<a href="http://localhost:4000">http://localhost:4000</a> で見れる。</p>
+
+<h3>テーマを変更する</h3>
+
+<p>以下は<a href="https://github.com/bijumon/oct2">oct2テーマ</a>を適用する方法</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone git@github.com:bijumon/oct2.git .themes/oct2
+</span><span class='line'>$ bundle exec rake install['oct2']
+</span><span class='line'>$ rake preview</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>GitHub Pages へ記事をアップ</h3>
+
+<p>記事をdeployする。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd source
+</span><span class='line'>$ rake gen_deploy</span></code></pre></td></tr></table></div></figure>
+
+
+<p>10分程経つと見れるようになるはず。</p>
 ]]></content>
   </entry>
   
