@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-08T21:23:04+09:00</updated>
+  <updated>2014-08-08T21:27:08+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -18,7 +18,7 @@
     <link href="http://yoshihitoaso.github.io/blog/2014/08/08/github-pages-plus-octopress/"/>
     <updated>2014-08-08T21:21:48+09:00</updated>
     <id>http://yoshihitoaso.github.io/blog/2014/08/08/github-pages-plus-octopress</id>
-    <content type="html"><![CDATA[<h2>GitHub Pages + Octopress 設定手順</h2>
+    <content type="html"><![CDATA[<p>Octopress で　GitHub Pages を作ってみたのでメモ。</p>
 
 <p>このへんとか、</p>
 
@@ -30,7 +30,7 @@
 
 <p>を参考にした。</p>
 
-<h3>install</h3>
+<h2>install</h2>
 
 <p>以下の手順でインストール&amp;deploy設定を行う</p>
 
@@ -52,7 +52,7 @@
 </span><span class='line'> git@github.com:YoshihitoAso/YoshihitoAso.github.io.git</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>sample page</h3>
+<h2>sample page</h2>
 
 <p>サンプルページを作ってみる</p>
 
@@ -68,7 +68,7 @@
 
 <p>でプレビューを見る。<a href="http://localhost:4000">http://localhost:4000</a> で見れる。</p>
 
-<h3>テーマを変更する</h3>
+<h2>テーマを変更する</h2>
 
 <p>以下は<a href="https://github.com/bijumon/oct2">oct2テーマ</a>を適用する方法</p>
 
@@ -80,7 +80,7 @@
 </span><span class='line'>$ rake preview</span></code></pre></td></tr></table></div></figure>
 
 
-<h3>GitHub Pages へ記事をアップ</h3>
+<h2>GitHub Pages へ記事をアップ</h2>
 
 <p>記事をdeployする。</p>
 
