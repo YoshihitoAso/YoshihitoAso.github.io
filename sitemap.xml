@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://yoshihitoaso.github.io/blog/2014/08/08/hadoop-conference-japan-2014-number-hcj2014/</loc>
+    <lastmod>2014-08-08T21:49:15+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://yoshihitoaso.github.io/blog/2014/08/08/github-pages-plus-octopress/</loc>
     <lastmod>2014-08-08T21:21:48+09:00</lastmod>
     <priority>0.8</priority>
@@ -11,21 +17,21 @@
   
   <url>
     <loc>http://yoshihitoaso.github.io/blog/archives/</loc>
-    <lastmod>2014-08-08T21:34:53+09:00</lastmod>
+    <lastmod>2014-08-08T22:13:01+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://yoshihitoaso.github.io/</loc>
-    <lastmod>2014-08-08T21:34:53+09:00</lastmod>
+    <lastmod>2014-08-08T22:13:01+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://yoshihitoaso.github.io/about/</loc>
-    <lastmod>2014-08-08T21:34:53+09:00</lastmod>
+    <lastmod>2014-08-08T22:13:01+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
