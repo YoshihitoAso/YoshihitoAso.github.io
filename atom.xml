@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[あそうのログ置き場]]></title>
-  <link href="http://YoshihitoAso.github.io/atom.xml" rel="self"/>
-  <link href="http://YoshihitoAso.github.io/"/>
-  <updated>2014-08-08T20:58:20+09:00</updated>
-  <id>http://YoshihitoAso.github.io/</id>
+  <title><![CDATA[/var/log/aso.log]]></title>
+  <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
+  <link href="http://yoshihitoaso.github.io/"/>
+  <updated>2014-08-08T21:18:43+09:00</updated>
+  <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[sample_page]]></title>
-    <link href="http://YoshihitoAso.github.io/blog/2014/08/08/sample-page/"/>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/08/sample-page/"/>
     <updated>2014-08-08T20:23:34+09:00</updated>
-    <id>http://YoshihitoAso.github.io/blog/2014/08/08/sample-page</id>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/08/sample-page</id>
     <content type="html"><![CDATA[
 ]]></content>
   </entry>

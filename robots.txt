@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://YoshihitoAso.github.io/sitemap.xml 
+Sitemap: http://yoshihitoaso.github.io/sitemap.xml 
