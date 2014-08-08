@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-08T22:13:01+09:00</updated>
+  <updated>2014-08-08T22:22:40+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -32,20 +32,20 @@
 <p>↓各種レポート記事へのリンク↓</p>
 
 <ul>
-<li><p><strong>gihyo.jp</strong></p>
+<li><strong>gihyo.jp</strong>
 
 <ul>
 <li><a href="http://gihyo.jp/news/report/2014/07/0902">日本よ，これが2014年のHadoopだ！─「Hadoop Conference Japan 2014」基調講演レポート</a></li>
 </ul>
 </li>
-<li><p><strong>ITpro</strong></p>
+<li><strong>ITpro</strong>
 
 <ul>
 <li><a href="http://itpro.nikkeibp.co.jp/article/NEWS/20140708/569985/">「Hadoopはビッグデータの“OSカーネル”」、Hadoop Conference Japan開催</a></li>
 <li><a href="http://itpro.nikkeibp.co.jp/article/COLUMN/20140711/570863/">NTTデータが4000コアのクラスターでSparkを試行、NTTドコモからの要望受け</a></li>
 </ul>
 </li>
-<li><p><strong>Publickey</strong></p>
+<li><strong>Publickey</strong>
 
 <ul>
 <li><a href="http://www.publickey1.jp/blog/14/yarnhadoophadoop_conference_japan_2014.html">YARNの登場によりHadoopは複数の並列分散処理エンジンを併用できる環境へ</a></li>
