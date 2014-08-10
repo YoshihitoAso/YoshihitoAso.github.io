@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-08T22:22:40+09:00</updated>
+  <updated>2014-08-11T01:12:53+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -18,13 +18,16 @@
     <link href="http://yoshihitoaso.github.io/blog/2014/08/08/hadoop-conference-japan-2014-number-hcj2014/"/>
     <updated>2014-08-08T21:49:15+09:00</updated>
     <id>http://yoshihitoaso.github.io/blog/2014/08/08/hadoop-conference-japan-2014-number-hcj2014</id>
-    <content type="html"><![CDATA[<p>メモは残してそのままにしていたが、こちらに書いておくことにする。</p>
+    <content type="html"><![CDATA[<p><img src="https://s3-ap-northeast-1.amazonaws.com/y-asoh.aws-demo.net/logo.png" title="hadoop" alt="hadoop" /></p>
+
+<p>メモは残してそのままにしていたが、こちらに書いておくことにする。</p>
+
+<!-- more -->
+
 
 <p>Hadoop Conference Japan 2014 に参加してきたので、その参加メモ。</p>
 
 <p>7/8に開催された Hadoop Conference Japan 2014に参加してきた（去年に引き続き2回目の参加）。</p>
-
-<p><img src="https://s3-ap-northeast-1.amazonaws.com/y-asoh.aws-demo.net/logo.png" title="hadoop" alt="hadoop" /></p>
 
 <p>そもそもHadoop Conference Japanとは、並列分散処理フレームワーク Apache Hadoop および周辺のオープンソースソフトウェアに関するユーザカンファレンス。
 日本Hadoopユーザー会の有志によって運営されており、今回で5回目の開催になる。</p>
@@ -362,6 +365,9 @@
     <updated>2014-08-08T21:21:48+09:00</updated>
     <id>http://yoshihitoaso.github.io/blog/2014/08/08/github-pages-plus-octopress</id>
     <content type="html"><![CDATA[<p>Octopress で　GitHub Pages を作ってみたのでメモ。</p>
+
+<!-- more -->
+
 
 <p>このへんとか、</p>
 
