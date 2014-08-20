@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-20T15:52:21+09:00</updated>
+  <updated>2014-08-20T15:57:40+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,6 +12,72 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[UbuntuにMongoDBをインストールする]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/"/>
+    <updated>2014-08-20T15:54:27+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo</id>
+    <content type="html"><![CDATA[<p>UbuntuにMongoDBをインストールしたときのメモ。</p>
+
+<p>※参考情報：OSのバージョン</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat /etc/lsb-release
+</span><span class='line'>DISTRIB_ID=Ubuntu
+</span><span class='line'>DISTRIB_RELEASE=12.10
+</span><span class='line'>DISTRIB_CODENAME=quantal
+</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.10"</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>MongoDBをインストール</h2>
+
+<p>公式ドキュメントの通り、以下の手順でインストール出来る</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+</span><span class='line'>$ echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+</span><span class='line'>$ sudo apt-get update
+</span><span class='line'>$ sudo apt-get install mongodb-10gen</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<h2>MongoDBの起動</h2>
+
+<p>起動停止は以下のコマンドで実施する。</p>
+
+<p>MongoDBのプロセスを開始</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongodb start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>MongoDBのプロセスを停止</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongodb stop</span></code></pre></td></tr></table></div></figure>
+
+
+<p>MongoDBのプロセスを再起動</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongodb restart</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ubuntu上にCDH4（Hadoop）擬似分散モード環境を構築する （※おまけでHiveをインストール）]]></title>
