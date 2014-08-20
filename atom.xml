@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-11T12:07:41+09:00</updated>
+  <updated>2014-08-20T15:52:21+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,6 +12,337 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu上にCDH4（Hadoop）擬似分散モード環境を構築する （※おまけでHiveをインストール）]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/20/cdh4-pseudo-distributed-mode/"/>
+    <updated>2014-08-20T15:44:13+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/20/cdh4-pseudo-distributed-mode</id>
+    <content type="html"><![CDATA[<p>Ubuntuサーバ上にCDH4を擬似分散モードでインストールした時のメモ。</p>
+
+<p>※参考情報：OSのバージョン</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat /etc/lsb-release
+</span><span class='line'>DISTRIB_ID=Ubuntu
+</span><span class='line'>DISTRIB_RELEASE=12.10
+</span><span class='line'>DISTRIB_CODENAME=quantal
+</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.10"</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<h2>Oracle-Javaのインストール</h2>
+
+<p>Java7をインストールする。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo add-apt-repository ppa:webupd8team/java
+</span><span class='line'>$ sudo apt-get update
+</span><span class='line'>$ sudo apt-get install oracle-java7-installer</span></code></pre></td></tr></table></div></figure>
+
+
+<p>バージョンの確認</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ java -version
+</span><span class='line'>java version "1.7.0_51"
+</span><span class='line'>Java(TM) SE Runtime Environment (build 1.7.0_51-b13)
+</span><span class='line'>Java HotSpot(TM) 64-Bit Server VM (build 24.51-b03, mixed mode)
+</span><span class='line'>$ javac -version
+</span><span class='line'>javac 1.7.0_51</span></code></pre></td></tr></table></div></figure>
+
+
+<p>pathにJAVA_HOMEを設定しておく必要がある。
+.bashrcに以下の設定を追記。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export JAVA_HOME=/usr/lib/jvm/java-7-oracle
+</span><span class='line'>export PATH=$PATH:$JAVA_HOME/bin</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>CDH4のインストール</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget http://archive.cloudera.com/cdh4/one-click-install/precise/amd64/cdh4-repository_1.0_all.deb
+</span><span class='line'>$ sudo dpkg -i cdh4-repository_1.0_all.deb
+</span><span class='line'>$ curl -s http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh/archive.key | sudo apt-key add -
+</span><span class='line'>
+</span><span class='line'>$ sudo apt-get update
+</span><span class='line'>$ sudo apt-get install hadoop-conf-pseudo</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ディレクトリを確認。各種設定ファイルが格納されている。
+通常起動の場合は編集の必要はない。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ls -l /etc/hadoop/conf.pseudo
+</span><span class='line'>total 40
+</span><span class='line'>-rw-r--r-- 1 root hadoop 1458 Feb 26 09:54 core-site.xml
+</span><span class='line'>-rw-r--r-- 1 root hadoop 1364 Feb 26 09:54 hadoop-env.sh
+</span><span class='line'>-rw-r--r-- 1 root hadoop 2890 Feb 26 09:54 hadoop-metrics.properties
+</span><span class='line'>-rw-r--r-- 1 root hadoop 1875 Feb 26 09:54 hdfs-site.xml
+</span><span class='line'>-rw-r--r-- 1 root hadoop 8735 Feb 26 10:21 log4j.properties
+</span><span class='line'>-rw-r--r-- 1 root hadoop 1549 Feb 26 09:54 mapred-site.xml
+</span><span class='line'>-rw-r--r-- 1 root hadoop 1104 Feb 26 09:54 README
+</span><span class='line'>-rw-r--r-- 1 root hadoop 2361 Feb 26 09:54 yarn-site.xml</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>HDFS /tmp directory を作成する</h2>
+
+<p>hdfsユーザでHDFSのフォーマットを実施する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo -u hdfs
+</span><span class='line'>$ hdfs namenode -format</span></code></pre></td></tr></table></div></figure>
+
+
+<p>HDFSを起動。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ /etc/init.d/hadoop-hdfs-namenode
+</span><span class='line'>$ /etc/init.d/hadoop-hdfs-datanode
+</span><span class='line'>$ /etc/init.d/hadoop-hdfs-secondarynamenode</span></code></pre></td></tr></table></div></figure>
+
+
+<p>とすれば良いけど、毎回このコマンドを打つのは面倒なので以下の様なスクリプト（hadoop-hdfs-start）を作っておく。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash
+</span><span class='line'>for service in /etc/init.d/hadoop-hdfs-*
+</span><span class='line'>do
+</span><span class='line'>sudo $service start
+</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+
+
+<p>停止の場合も同様。以下の様なスクリプト（hadoop-hdfs-stop）を作っておくとラク。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/bin/bash
+</span><span class='line'>for service in /etc/init.d/hadoop-hdfs-*
+</span><span class='line'>do
+</span><span class='line'>sudo $service stop
+</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+
+
+<p>起動を実行したら、各サービスが起動していることを確認する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo $JAVA_HOME/bin/jps
+</span><span class='line'>4233 Jps
+</span><span class='line'>2476 NodeManager
+</span><span class='line'>2007 SecondaryNameNode
+</span><span class='line'>2622 ResourceManager
+</span><span class='line'>1827 NameNode
+</span><span class='line'>1652 DataNode</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>必要なDirectoryを作成する</h2>
+
+<p>HDFS上に必要なディレクトリを作成していく。この作業もhdfsユーザで実施する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo su - hdfs
+</span><span class='line'>$ hadoop fs -mkdir /tmp　←HDFS上に/tmpを作成
+</span><span class='line'>$ hadoop fs -chmod -R 1777 /tmp
+</span><span class='line'>$ hadoop fs -mkdir /var/log/hadoop-yarn
+</span><span class='line'>$ hadoop fs -chown yarn:mapred /var/log/hadoop-yarn
+</span><span class='line'>$ hadoop fs -mkdir /tmp/hadoop-yarn/staging
+</span><span class='line'>$ hadoop fs -chmod -R 1777 /tmp/hadoop-yarn/staging
+</span><span class='line'>$ hadoop fs -mkdir /tmp/hadoop-yarn/staging/history/done_intermediate
+</span><span class='line'>$ hadoop fs -chmod -R 1777 /tmp/hadoop-yarn/staging/history/done_intermediate
+</span><span class='line'>$ hadoop fs -mkdir /user/$USER　←hdfsユーザのホームディレクトリ/user/hdfs
+</span><span class='line'>$ hadoop fs -chown hdfs /user/$USER</span></code></pre></td></tr></table></div></figure>
+
+
+<p>/user/hdfsが作業ディレクトリと考えてよい。上記実行中エラーが出て中断するようなら、HDFSが落ちている可能性があるので起動状態を確認してみる。</p>
+
+<p>HDFS上のlsは以下のようにして実行する。上記で作ったtmp,user,varができてればOK。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ hadoop fs -ls /
+</span><span class='line'>Found 3 items
+</span><span class='line'>drwxrwxrwt – hdfs supergroup 0 2013-01-05 12:10 /tmp
+</span><span class='line'>drwxr-xr-x – hdfs supergroup 0 2013-01-05 12:36 /user
+</span><span class='line'>drwxr-xr-x – hdfs supergroup 0 2013-01-05 12:09 /var</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Start YARN !!!!!</h2>
+
+<p>管理ユーザにスイッチしてYARN (MapReduce)を起動する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service hadoop-yarn-resourcemanager start
+</span><span class='line'>$ sudo service hadoop-yarn-nodemanager start
+</span><span class='line'>$ sudo service hadoop-mapreduce-historyserver start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>プロセスの確認。以下の様な感じになっていればOK。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo $JAVA_HOME/bin/jps
+</span><span class='line'>2598 ResourceManager
+</span><span class='line'>4798 JobHistoryServer
+</span><span class='line'>4840 Jps
+</span><span class='line'>1752 NameNode
+</span><span class='line'>2448 NodeManager
+</span><span class='line'>2043 SecondaryNameNode
+</span><span class='line'>1496 DataNode</span></code></pre></td></tr></table></div></figure>
+
+
+<h1>おまけ）Hiveをインストールして使ってみる</h1>
+
+<h2>Hiveのインストール</h2>
+
+<p>以下の手順でHiveをインストールする。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd Downloads/
+</span><span class='line'>$ mkdir hive
+</span><span class='line'>$ cd hive/
+</span><span class='line'>$ wget http://mirror.tcpdiag.net/apache/hive/stable/hive-0.11.0.tar.gz
+</span><span class='line'>$ tar xzf hive-0.11.0.tar.gz
+</span><span class='line'>$ mkdir /usr/lib/hive
+</span><span class='line'>$ mv hive-0.11.0 /usr/lib/hive/hive-0.11.0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>環境変数を設定する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd
+</span><span class='line'>$ vim .bashrc
+</span><span class='line'>$ export HIVE_HOME=/usr/lib/hive/hive-0.11.0
+</span><span class='line'>$ export PATH=$PATH:$HIVE_HOME/bin</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Login</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ hive
+</span><span class='line'>...
+</span><span class='line'>..
+</span><span class='line'>.
+</span><span class='line'>
+</span><span class='line'>hive&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でOK。</p>
+
+<h2>Sample : Create Table</h2>
+
+<p>Tableを作成して、CSV形式のファイルをロードしてみる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hive&gt; create table cats (id int, name string, birthday string) row format delimited fields terminated by ',' lines terminated by '\n';</span></code></pre></td></tr></table></div></figure>
+
+
+<p>csv形式のファイルを以下のように用意する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vim cats.csv
+</span><span class='line'>
+</span><span class='line'>1,Tama,19929423
+</span><span class='line'>2,Tora,19930304
+</span><span class='line'>3,Nya,19930304
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以下のコマンドでロード出来る。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hive&gt; load data local inpath '/root/hadoop/hive/cats.csv' overwrite into table cats;</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[straceでjavaプロセスの挙動を確認した]]></title>
