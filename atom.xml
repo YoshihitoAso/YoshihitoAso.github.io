@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-25T22:24:17+09:00</updated>
+  <updated>2014-08-25T22:26:32+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,98 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Excelシートの書式をすべて削除するマクロ]]></title>
-    <link href="http://yoshihitoaso.github.io/blog/2014/08/25/clear-excel-formats/"/>
-    <updated>2014-08-25T22:16:06+09:00</updated>
-    <id>http://yoshihitoaso.github.io/blog/2014/08/25/clear-excel-formats</id>
-    <content type="html"><![CDATA[<p>仕事柄Excelを使うことが多いです。</p>
-
-<p>最近も回ってきた資料を更新していたら、列をコピーして挿入などすると、</p>
-
-<p>「セルの書式が多すぎるため、書式を追加できません」</p>
-
-<p>のエラーが出まくって暫く白目をむいたりした。</p>
-
-<p>そんな時のメモ。</p>
-
-<!-- more -->
-
-
-<p>ネットで調べたところ、原因としては新しい書式設定をするたびにExcelがそのセルの書式パターンをスタイルとして過去分も蓄積するためらしい。これが例えばExcel2007であれば、64000パターンを超えると上記のエラーが出るようだ。</p>
-
-<p>Excelのホームタブで「スタイル」のところのプルダウンに大量に書式が出てきたら、このエラーが出やすくなっている資料なので、使い回す際は気をつけろということになる。</p>
-
-<p>過去分の書式はマクロを利用して消す事ができる（Excelの標準機能は画面から一つずつ消していくしかない）。</p>
-
-<p>削除マクロの例は以下の記事にありました。ありがとうございます。</p>
-
-<p><a href="http://www.ixam.net/ms-excel/vba-bian/delete-style">書式（スタイル）と名前の定義をすべて削除する - ixam</a></p>
-
-<p>シートの一番下のタブを右クリックして、「コードの表示」を選択して、マクロのソースに以下のコードを貼り付けて、実行すると過去の書式が消える。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Sub delete_name_and_style()
-</span><span class='line'>
-</span><span class='line'>    On Error Resume Next
-</span><span class='line'>
-</span><span class='line'>'名前定義を全削除（名前を関数その他に有効活用している場合はここは削除）
-</span><span class='line'>
-</span><span class='line'>    Dim N As Name
-</span><span class='line'>    For Each N In ActiveWorkbook.Names
-</span><span class='line'>        N.Delete
-</span><span class='line'>    Next
-</span><span class='line'>
-</span><span class='line'>'書式（スタイル）定義を全削除
-</span><span class='line'>
-</span><span class='line'>    Dim M()
-</span><span class='line'>
-</span><span class='line'>    J = ActiveWorkbook.Styles.Count
-</span><span class='line'>    ReDim M(J)
-</span><span class='line'>    For i = 1 To J
-</span><span class='line'>        M(i) = ActiveWorkbook.Styles(i).Name
-</span><span class='line'>    Next
-</span><span class='line'>    For i = 1 To J
-</span><span class='line'>        If InStr("Hyperlink,Normal,Followed Hyperlink", _
-</span><span class='line'>                    M(i)) = 0 Then
-</span><span class='line'>            ActiveWorkbook.Styles(M(i)).Delete
-</span><span class='line'>        End If
-</span><span class='line'>    Next
-</span><span class='line'>
-</span><span class='line'>End Sub</span></code></pre></td></tr></table></div></figure>
-
-
-<p>このコードは名前定義も削除するコードなので、必要無ければ該当部分は消しても良い。</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[pyqueryでWebスクレイピング]]></title>
@@ -356,6 +264,98 @@
 -   scrapy</p>
 
 <p>それぞれ特徴があり、できる事も違う。用途によって使い分ける感じになると思う。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Clear Excel Formats]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/25/clear-excel-formats/"/>
+    <updated>2014-08-25T00:00:00+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/25/clear-excel-formats</id>
+    <content type="html"><![CDATA[<p>仕事柄Excelを使うことが多いです。</p>
+
+<p>最近も回ってきた資料を更新していたら、列をコピーして挿入などすると、</p>
+
+<p>「セルの書式が多すぎるため、書式を追加できません」</p>
+
+<p>のエラーが出まくって暫く白目をむいたりした。</p>
+
+<p>そんな時のメモ。</p>
+
+<!-- more -->
+
+
+<p>ネットで調べたところ、原因としては新しい書式設定をするたびにExcelがそのセルの書式パターンをスタイルとして過去分も蓄積するためらしい。これが例えばExcel2007であれば、64000パターンを超えると上記のエラーが出るようだ。</p>
+
+<p>Excelのホームタブで「スタイル」のところのプルダウンに大量に書式が出てきたら、このエラーが出やすくなっている資料なので、使い回す際は気をつけろということになる。</p>
+
+<p>過去分の書式はマクロを利用して消す事ができる（Excelの標準機能は画面から一つずつ消していくしかない）。</p>
+
+<p>削除マクロの例は以下の記事にありました。ありがとうございます。</p>
+
+<p><a href="http://www.ixam.net/ms-excel/vba-bian/delete-style">書式（スタイル）と名前の定義をすべて削除する - ixam</a></p>
+
+<p>シートの一番下のタブを右クリックして、「コードの表示」を選択して、マクロのソースに以下のコードを貼り付けて、実行すると過去の書式が消える。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Sub delete_name_and_style()
+</span><span class='line'>
+</span><span class='line'>    On Error Resume Next
+</span><span class='line'>
+</span><span class='line'>'名前定義を全削除（名前を関数その他に有効活用している場合はここは削除）
+</span><span class='line'>
+</span><span class='line'>    Dim N As Name
+</span><span class='line'>    For Each N In ActiveWorkbook.Names
+</span><span class='line'>        N.Delete
+</span><span class='line'>    Next
+</span><span class='line'>
+</span><span class='line'>'書式（スタイル）定義を全削除
+</span><span class='line'>
+</span><span class='line'>    Dim M()
+</span><span class='line'>
+</span><span class='line'>    J = ActiveWorkbook.Styles.Count
+</span><span class='line'>    ReDim M(J)
+</span><span class='line'>    For i = 1 To J
+</span><span class='line'>        M(i) = ActiveWorkbook.Styles(i).Name
+</span><span class='line'>    Next
+</span><span class='line'>    For i = 1 To J
+</span><span class='line'>        If InStr("Hyperlink,Normal,Followed Hyperlink", _
+</span><span class='line'>                    M(i)) = 0 Then
+</span><span class='line'>            ActiveWorkbook.Styles(M(i)).Delete
+</span><span class='line'>        End If
+</span><span class='line'>    Next
+</span><span class='line'>
+</span><span class='line'>End Sub</span></code></pre></td></tr></table></div></figure>
+
+
+<p>このコードは名前定義も削除するコードなので、必要無ければ該当部分は消しても良い。</p>
 ]]></content>
   </entry>
   

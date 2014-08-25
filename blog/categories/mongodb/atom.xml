@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mongodb | /var/log/aso.log]]></title>
+  <link href="http://yoshihitoaso.github.io/blog/categories/mongodb/atom.xml" rel="self"/>
+  <link href="http://yoshihitoaso.github.io/"/>
+  <updated>2014-08-25T22:26:32+09:00</updated>
+  <id>http://yoshihitoaso.github.io/</id>
+  <author>
+    <name><![CDATA[Yoshihito Aso]]></name>
+    <email><![CDATA[yoshihito.asoh@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[UbuntuにMongoDBをインストールする]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/"/>
+    <updated>2014-08-20T15:54:27+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo</id>
+    <content type="html"><![CDATA[<p>UbuntuにMongoDBをインストールしたときのメモ。</p>
+
+<p>※参考情報：OSのバージョン
+<code>
+$ cat /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=12.10
+DISTRIB_CODENAME=quantal
+DISTRIB_DESCRIPTION="Ubuntu 12.10"
+</code></p>
+
+<h2>MongoDBをインストール</h2>
+
+<p>公式ドキュメントの通り、以下の手順でインストール出来る
+<code>
+$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+$ echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
+$ sudo apt-get update
+$ sudo apt-get install mongodb-10gen
+</code></p>
+
+<!-- more -->
+
+
+<h2>MongoDBの起動</h2>
+
+<p>起動停止は以下のコマンドで実施する。</p>
+
+<p>MongoDBのプロセスを開始
+<code>
+$ sudo service mongodb start
+</code></p>
+
+<p>MongoDBのプロセスを停止
+<code>
+$ sudo service mongodb stop
+</code></p>
+
+<p>MongoDBのプロセスを再起動
+<code>
+$ sudo service mongodb restart
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

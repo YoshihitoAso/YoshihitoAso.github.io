@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ll | /var/log/aso.log]]></title>
+  <link href="http://yoshihitoaso.github.io/blog/categories/ll/atom.xml" rel="self"/>
+  <link href="http://yoshihitoaso.github.io/"/>
+  <updated>2014-08-25T22:26:32+09:00</updated>
+  <id>http://yoshihitoaso.github.io/</id>
+  <author>
+    <name><![CDATA[Yoshihito Aso]]></name>
+    <email><![CDATA[yoshihito.asoh@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[LL DIVER 参加メモ]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/25/ll-diver-2014/"/>
+    <updated>2014-08-25T19:52:58+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/25/ll-diver-2014</id>
+    <content type="html"><![CDATA[<p>2014/08/23 にお台場の日本科学未来館で開催された 『<a href="http://ll.jus.or.jp/2014/">LL DIVER</a>』　に参加して来た。こちらはその時のメモ。</p>
+
+<p>※資料がまだ全て公開されていないようだったので、資料が公開され次第、随時更新していくつもり。</p>
+
+<p><img src="https://s3-ap-northeast-1.amazonaws.com/y-asoh.aws-demo.net/lldiver.logo_.jpg" title="lldiver" alt="lldiver" /></p>
+
+<!-- more -->
+
+
+<p>当日のタイムテーブルは<a href="http://ll.jus.or.jp/2014/timetable">こちら</a>から。</p>
+
+<p>自分が聞いたのは以下の公演。</p>
+
+<ul>
+<li>○○ as Code</li>
+<li>HerokuでGauche</li>
+<li>Guraプログラミング言語の紹介</li>
+<li>PythonによるWebスクレイピング入門</li>
+<li>エディタ対決(仮)</li>
+<li>LT</li>
+</ul>
+
+
+<h1>○○ as Code</h1>
+
+<p>パネリストは以下の4名</p>
+
+<ul>
+<li>高野祥幸さん</li>
+<li>前佛雅人さん @zembutsu</li>
+<li>吉田賢造さん</li>
+<li>司会：佐々木健さん @sasakipochi</li>
+</ul>
+
+
+<h2>インフラのCode化：高野さん（ニフティクラウド）</h2>
+
+<p>インフラのCode化</p>
+
+<ul>
+<li>インフラ as Code：　インスタンス起動など</li>
+<li>ミドルウェア as Code：　DBをたてる（バックアップの設定なども可能）など</li>
+<li>バックエンド as Code：　よりインフラを隠蔽化されていたり</li>
+<li>例えば、ニフティクラウドではインフラをコード（サンプルはJavaだった）から出来るようになっている</li>
+</ul>
+
+
+<p>システム開発の各工程（要件定義、設計、開発、テスト、リリース）をCode化</p>
+
+<ul>
+<li>各工程はコード化されている</li>
+<li>設計：今だとテスト駆動（TDD）でやったりする</li>
+<li>開発：色々な言語で開発する</li>
+<li>テスト：SeleniumとかXUnitとか、コードを書いてテストする</li>
+<li>リリース：AnsibleやChefでコード化出来る</li>
+<li>唯一要件定義工程がコード化されていない。</li>
+<li>無いならなくせば？という発想で今考え始めているところ。答えはまだ無い。</li>
+</ul>
+
+
+<h2>農業のCode化：前佛さん</h2>
+
+<p>現在の農業ソリューションは高価である。
+農業分野にもOSSやクラウドコンピューティングの考えが導入出来ないか？と考えている。</p>
+
+<p>運用監視の自動化</p>
+
+<ul>
+<li>昔に比べてサービスが落ちた時の影響度が甚大である</li>
+<li>全て人手では難しい。運用の自動化・Code化。</li>
+<li>運用監視としてMuninやZabix、オーケストレーションツール（Serf、Consul）などで自動化したり。</li>
+<li>運用のコード化の流れ
+
+<ul>
+<li>作業手順書作成</li>
+<li>監視ツール導入</li>
+<li>自動化技術の導入</li>
+</ul>
+</li>
+</ul>
+
+
+<p>農業への適用を考えたい</p>
+
+<ul>
+<li>牛→餌の食わない牛（機械）へ</li>
+<li>なぜ農業で自動化・コード化が必要？
+
+<ul>
+<li>人が足りてない</li>
+<li>商品での差別化は難しい</li>
+</ul>
+</li>
+<li>重要になってくる分野
+
+<ul>
+<li>情報化、自動化、ロボット技術</li>
+<li>流れの中でslack, hubotを利用してみたら良いかもみたいな話があった。</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>工業のCode化：吉田さん（株式会社スマメ代表など）</h2>
+
+<p>3Dプリンタ関連の導入支援を行っている（DMM.makeとか）。その他にしぶや図工室、Fabbitなど。</p>
+
+<p>3Dプリンタ業界のぶっちゃけ話</p>
+
+<ul>
+<li>プレーヤーがずっと変わってない（市場的に成熟してしまっている）</li>
+<li>金額が色々とおかしい（日本では価格が高すぎる）</li>
+<li>そもそも思っている程大したものではない
+
+<ul>
+<li>出来る形状と出来ない形状がある</li>
+<li>独自の素材しか使えない</li>
+<li>材料費が高い</li>
+<li>データ形式（stl）が汎用的ではない（かなり前から存在する形式）</li>
+</ul>
+</li>
+</ul>
+
+
+<p>3Dプリンタが使えると思われる分野</p>
+
+<ul>
+<li>補聴器</li>
+<li>義歯、義足、人工骨/インプラント</li>
+</ul>
+
+
+<h2>ディスカッション</h2>
+
+<p>Googleカーみたいなものは農業分野で役立つか？みたいな話があった。
+これについては、まだやや飛躍気味で、機械学習が出来るような知見がたまるまでに少し時間がかかるだろうという話であった。それよりももっと細かいところでの改善がまだまだ必要で、田んぼに引き込む水量の制御など、自動化出来るところがまだまだあるのでは？といった話がされていた。</p>
+
+<p>農業分野に3Dプリンタが生かせないか？みたいな話があった。</p>
+
+<ul>
+<li>壊れても良い、安価な機械を３Dプリンタで作ることが出来たらおもしろいかも</li>
+<li>情報を公開することで、ノウハウの共有、オープンソース化が出来る。</li>
+</ul>
+
+
+<h1>HerokuでGauche (あるいは、好きな言語何でも)：久井亨さん</h1>
+
+<p>Herokuは色々な言語が使える。ただし、GaucheのようなScheme処理系はサポートされていない。</p>
+
+<p>Herokuの内部構造</p>
+
+<ul>
+<li>App
+
+<ul>
+<li>Cedar Stack　（ベースOS Ubuntu 10.4）
+
+<ul>
+<li>Dyno</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<p>HerokuでScheme処理系言語を使いたいなら、Cedar Stack上でSlugを利用すればOK。</p>
+
+<p>参考：<a href="http://torus.tumblr.com/post/87300539228/heroku-gauche">Heroku で Gauche のアプリケーションを動かす</a></p>
+
+<p>ただし、Ubuntu10.04でコンパイルする必要がある。Dockerを使うと便利。</p>
+
+<h1>PythonによるWebスクレイピング入門：関根裕紀さん</h1>
+
+<p>Webスクレイピングの方法</p>
+
+<ul>
+<li>1)Webサービスを使う（Yahoo! Pipesとか）</li>
+<li>2)プログラム言語を使う</li>
+</ul>
+
+
+<p>pythonの場合は以下の選択肢がある
+-   標準ライブラリ　urllib2
+-   beautiful soup
+-   pyquery
+-   scrapy</p>
+
+<p>それぞれ特徴があり、できる事も違う。用途によって使い分ける感じになると思う。</p>
+]]></content>
+  </entry>
+  
+</feed>
