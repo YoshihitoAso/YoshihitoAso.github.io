@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-25T20:12:51+09:00</updated>
+  <updated>2014-08-25T20:28:40+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,6 +12,63 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[pyqueryでWebスクレイピング]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/25/pyquery/"/>
+    <updated>2014-08-25T20:15:05+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/25/pyquery</id>
+    <content type="html"><![CDATA[<p>pyqueryを使ってスクレイピングしてみた時のメモ。以下のサイトを参考にした。</p>
+
+<p>1) <a href="http://tnakamura.hatenablog.com/entry/20110602/python_scraping_pyquery">PyQuery で再びスクレイピング入門 - present</a></p>
+
+<p>2) GitHub: <a href="https://github.com/gawel/pyquery/">gawel/pyquery</a></p>
+
+<h2>インストール</h2>
+
+<p>pipでインストール</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pip install pyquery</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でOK。pyqueryが依存しているlxmlもあわせてインストールされる。</p>
+
+<h2>使い方</h2>
+
+<p>使い方は簡単で、jquery的に、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>from pyquery import PyQuery
+</span><span class='line'>q = PyQuery(url='http://b.hatena.ne.jp/')
+</span><span class='line'>
+</span><span class='line'>for elem in q.find('a.entry-link'):
+</span><span class='line'>#PyQuery
+</span><span class='line'>    q2 = PyQuery(elem)
+</span><span class='line'>    print q2.text()
+</span><span class='line'>    print q2.attr('href')
+</span><span class='line'>
+</span><span class='line'>#lxml
+</span><span class='line'>#    print elem.text
+</span><span class='line'>#    print elem.get('href')</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんな感じで使える。</p>
+
+<p>短いけど以上。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[LL DIVER 参加メモ]]></title>

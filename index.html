@@ -9,7 +9,8 @@
   <meta name="author" content="Yoshihito Aso">
 
   
-  <meta name="description" content="2014/08/23 にお台場の日本科学未来館で開催された 『LL DIVER』　に参加して来た。こちらはその時のメモ。 ※資料がまだ全て公開されていないようだったので、資料が公開され次第、随時更新していくつもり。 ">
+  <meta name="description" content="pyqueryを使ってスクレイピングしてみた時のメモ。以下のサイトを参考にした。 1) PyQuery で再びスクレイピング入門 - present 2) GitHub: gawel/pyquery インストール pipでインストール 1
+pip install pyquery でOK。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +71,90 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/25/pyquery/">pyqueryでWebスクレイピング</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-25T20:15:05+09:00" pubdate data-updated="true">Aug 25<sup>th</sup>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>pyqueryを使ってスクレイピングしてみた時のメモ。以下のサイトを参考にした。</p>
+
+<p>1) <a href="http://tnakamura.hatenablog.com/entry/20110602/python_scraping_pyquery">PyQuery で再びスクレイピング入門 - present</a></p>
+
+<p>2) GitHub: <a href="https://github.com/gawel/pyquery/">gawel/pyquery</a></p>
+
+<h2>インストール</h2>
+
+<p>pipでインストール</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pip install pyquery</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でOK。pyqueryが依存しているlxmlもあわせてインストールされる。</p>
+
+<h2>使い方</h2>
+
+<p>使い方は簡単で、jquery的に、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>from pyquery import PyQuery
+</span><span class='line'>q = PyQuery(url='http://b.hatena.ne.jp/')
+</span><span class='line'>
+</span><span class='line'>for elem in q.find('a.entry-link'):
+</span><span class='line'>#PyQuery
+</span><span class='line'>    q2 = PyQuery(elem)
+</span><span class='line'>    print q2.text()
+</span><span class='line'>    print q2.attr('href')
+</span><span class='line'>
+</span><span class='line'>#lxml
+</span><span class='line'>#    print elem.text
+</span><span class='line'>#    print elem.get('href')</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんな感じで使える。</p>
+
+<p>短いけど以上。</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -461,6 +546,10 @@ JBossのtwiddleがある環境でロングランする事象があったので�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/08/25/pyquery/">pyqueryでWebスクレイピング</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/25/ll-diver-2014/">LL DIVER 参加メモ</a>
       </li>
     
@@ -474,10 +563,6 @@ JBossのtwiddleがある環境でロングランする事象があったので�
     
       <li class="post">
         <a href="/blog/2014/08/11/strace/">straceでjavaプロセスの挙動を確認した</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/08/hadoop-conference-japan-2014-number-hcj2014/">Hadoop Conference Japan 2014　参加メモ #hcj2014</a>
       </li>
     
   </ul>

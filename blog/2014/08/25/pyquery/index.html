@@ -5,11 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>about - /var/log/aso.log</title>
+  <title>pyqueryでWebスクレイピング - /var/log/aso.log</title>
   <meta name="author" content="Yoshihito Aso">
 
   
-  <meta name="description" content="About Jan 25th, 2014 Jan 25th, 2014 Tweet /var/log/aso.log Home Archives About Feed Recent Posts pyqueryでWebスクレイピング LL DIVER 参加メモ &hellip;">
+  <meta name="description" content="pyqueryを使ってスクレイピングしてみた時のメモ。以下のサイトを参考にした。 1) PyQuery で再びスクレイピング入門 - present 2) GitHub: gawel/pyquery インストール pipでインストール 1
+pip install pyquery でOK。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoshihitoaso.github.io/about/">
+  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/2014/08/25/pyquery/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -69,32 +70,15 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">About</h1>
-    <p class="meta">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-25T10:25:00+09:00" pubdate data-updated="true">Jan 25<sup>th</sup>, 2014</time></p>
-  </header>
-  
-  
-
-  
-    <footer>
+    
+      <h1 class="entry-title">pyqueryでWebスクレイピング</h1>
+    
+    
       <p class="meta">
         
-        
 
 
 
@@ -106,21 +90,106 @@
   
 
 
-<time datetime="2014-01-25T10:25:00+09:00" pubdate data-updated="true">Jan 25<sup>th</sup>, 2014</time>
+<time datetime="2014-08-25T20:15:05+09:00" pubdate data-updated="true">Aug 25<sup>th</sup>, 2014</time>
         
       </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>pyqueryを使ってスクレイピングしてみた時のメモ。以下のサイトを参考にした。</p>
+
+<p>1) <a href="http://tnakamura.hatenablog.com/entry/20110602/python_scraping_pyquery">PyQuery で再びスクレイピング入門 - present</a></p>
+
+<p>2) GitHub: <a href="https://github.com/gawel/pyquery/">gawel/pyquery</a></p>
+
+<h2>インストール</h2>
+
+<p>pipでインストール</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>pip install pyquery</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でOK。pyqueryが依存しているlxmlもあわせてインストールされる。</p>
+
+<h2>使い方</h2>
+
+<p>使い方は簡単で、jquery的に、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>from pyquery import PyQuery
+</span><span class='line'>q = PyQuery(url='http://b.hatena.ne.jp/')
+</span><span class='line'>
+</span><span class='line'>for elem in q.find('a.entry-link'):
+</span><span class='line'>#PyQuery
+</span><span class='line'>    q2 = PyQuery(elem)
+</span><span class='line'>    print q2.text()
+</span><span class='line'>    print q2.attr('href')
+</span><span class='line'>
+</span><span class='line'>#lxml
+</span><span class='line'>#    print elem.text
+</span><span class='line'>#    print elem.get('href')</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんな感じで使える。</p>
+
+<p>短いけど以上。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
       
-        <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yoshihitoaso.github.io/about/index.html" data-via="y_asoh" data-counturl="http://yoshihitoaso.github.io/about/index.html" >Tweet</a>
+
+<span class="byline author vcard">Posted by <span class="fn">Yoshihito Aso</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-25T20:15:05+09:00" pubdate data-updated="true">Aug 25<sup>th</sup>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yoshihitoaso.github.io/blog/2014/08/25/pyquery/" data-via="y_asoh" data-counturl="http://yoshihitoaso.github.io/blog/2014/08/25/pyquery/" >Tweet</a>
   
   
   
 </div>
 
+    
+    <p class="meta">
       
-    </footer>
-  
+        <a class="basic-alignment left" href="/blog/2014/08/25/ll-diver-2014/" title="Previous Post: LL DIVER 参加メモ">&laquo; LL DIVER 参加メモ</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
