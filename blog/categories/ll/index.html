@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>GitHub Pages + Octopress - /var/log/aso.log</title>
+  <title>Category: ll - /var/log/aso.log</title>
   <meta name="author" content="Yoshihito Aso">
 
   
-  <meta name="description" content="Octopress で　GitHub Pages を作ってみたのでメモ。 このへんとか、 OctopressでGitHub無料ブログ構築。sourceをBitbucket管理。簡単ガイド！ - 酒と泪とRubyとRails このへんとか、 GitHub Pages + Octopress &hellip;">
+  <meta name="description" content="Category: ll">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/2014/08/08/github-pages-plus-octopress/">
+  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/categories/ll/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -69,159 +69,35 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">GitHub Pages + Octopress</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-08T21:21:48+09:00" pubdate data-updated="true">Aug 8<sup>th</sup>, 2014</time>
-        
-      </p>
+    <h1 class="entry-title">Category: Ll</h1>
     
   </header>
+  
+  <div id="blog-archives" class="category">
 
 
-<div class="entry-content"><p>Octopress で　GitHub Pages を作ってみたのでメモ。</p>
 
-<!-- more -->
+  
+  <h2>2014</h2>
 
+<article>
+  
+<h1><a href="/blog/2014/08/25/ll-diver-2014/">LL DIVER 参加メモ</a></h1>
+<time datetime="2014-08-25T19:52:58+09:00" pubdate><span class='month'>Aug</span> <span class='day'>25</span> <span class='year'>2014</span></time>
 
-<p>このへんとか、</p>
-
-<p><a href="http://morizyun.github.io/blog/octopress-gitpage-minimum-install-guide/">OctopressでGitHub無料ブログ構築。sourceをBitbucket管理。簡単ガイド！ - 酒と泪とRubyとRails</a></p>
-
-<p>このへんとか、</p>
-
-<p><a href="http://qiita.com/syui/items/07365ed24eef63602233">GitHub Pages + Octopress カスタマイズ - Qiita</a></p>
-
-<p>を参考にした。</p>
-
-<h2>GitHubにリポジトリを作る</h2>
-
-<p>自分のGitHubにログインして、GitHub PagesのGitHubリポジトリを作成する。
-リポジトリ名は 「username.github.io」　でusernameのところには自分のユーザー名を入れる。</p>
-
-<h2>Octopressのインストール</h2>
-
-<p>以下の手順でOctopressのインストール&amp;GitHubへのdeploy設定を行う。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone git@github.com:imathis/octopress.git YoshihitoAso.github.io
-</span><span class='line'>$ gem install bundler
-</span><span class='line'>
-</span><span class='line'>$ bundle install
-</span><span class='line'>$ bundle exec rake install
-</span><span class='line'>$ bundle exec rake setup_github_pages
-</span><span class='line'> Enter the read/write url for your repository: git@github.com: username/username.github.com.git
-</span><span class='line'> git@github.com:YoshihitoAso/YoshihitoAso.github.io.git</span></code></pre></td></tr></table></div></figure>
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/ll/'>ll</a></span>
+</footer>
 
 
-<h2>sample page</h2>
+</article>
 
-<p>インストールが終わったので、サンプルページを作ってみる。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake new_post['sample_page']</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でOK。すると、./source/_posts 配下に新しい *.markdown ファイルが出来ているはず。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ rake preview</span></code></pre></td></tr></table></div></figure>
-
-
-<p>でプレビューを見れる。<a href="http://localhost:4000">http://localhost:4000</a> で見れる。</p>
-
-<h2>テーマを変更する</h2>
-
-<p>テーマを変更してみようかという気になる。
-以下は<a href="https://github.com/bijumon/oct2">oct2テーマ</a>を適用する方法。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone git@github.com:bijumon/oct2.git .themes/oct2
-</span><span class='line'>$ bundle exec rake install['oct2']
-</span><span class='line'>$ rake preview</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>GitHub Pages へ記事をアップ</h2>
-
-<p>最後に記事をdeployする。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd source
-</span><span class='line'>$ rake gen_deploy</span></code></pre></td></tr></table></div></figure>
-
-
-<p>とすればOK。最初は10分程経つと見れるようになるはず。</p>
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Yoshihito Aso</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-08T21:21:48+09:00" pubdate data-updated="true">Aug 8<sup>th</sup>, 2014</time>
-      
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yoshihitoaso.github.io/blog/2014/08/08/github-pages-plus-octopress/" data-via="y_asoh" data-counturl="http://yoshihitoaso.github.io/blog/2014/08/08/github-pages-plus-octopress/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/08/08/hadoop-conference-japan-2014-number-hcj2014/" title="Next Post: Hadoop Conference Japan 2014　参加メモ #hcj2014">Hadoop Conference Japan 2014　参加メモ #hcj2014 &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
 </div>

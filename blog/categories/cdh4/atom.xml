@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: cdh4 | /var/log/aso.log]]></title>
+  <link href="http://yoshihitoaso.github.io/blog/categories/cdh4/atom.xml" rel="self"/>
+  <link href="http://yoshihitoaso.github.io/"/>
+  <updated>2014-08-26T21:47:43+09:00</updated>
+  <id>http://yoshihitoaso.github.io/</id>
+  <author>
+    <name><![CDATA[Yoshihito Aso]]></name>
+    <email><![CDATA[yoshihito.asoh@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu上にCDH4（Hadoop）擬似分散モード環境を構築する （※おまけでHiveをインストール）]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/20/cdh4-pseudo-distributed-mode/"/>
+    <updated>2014-08-20T15:44:13+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/20/cdh4-pseudo-distributed-mode</id>
+    <content type="html"><![CDATA[<p>Ubuntuサーバ上にCDH4を擬似分散モードでインストールした時のメモ。</p>
+
+<p>※参考情報：OSのバージョン
+<code>
+$ cat /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=12.10
+DISTRIB_CODENAME=quantal
+DISTRIB_DESCRIPTION="Ubuntu 12.10"
+</code></p>
+
+<!-- more -->
+
+
+<h2>Oracle-Javaのインストール</h2>
+
+<p>Java7をインストールする。
+<code>
+$ sudo add-apt-repository ppa:webupd8team/java
+$ sudo apt-get update
+$ sudo apt-get install oracle-java7-installer
+</code></p>
+
+<p>バージョンの確認
+<code>
+$ java -version
+java version "1.7.0_51"
+Java(TM) SE Runtime Environment (build 1.7.0_51-b13)
+Java HotSpot(TM) 64-Bit Server VM (build 24.51-b03, mixed mode)
+$ javac -version
+javac 1.7.0_51
+</code>
+pathにJAVA_HOMEを設定しておく必要がある。
+.bashrcに以下の設定を追記。
+<code>
+export JAVA_HOME=/usr/lib/jvm/java-7-oracle
+export PATH=$PATH:$JAVA_HOME/bin
+</code></p>
+
+<h2>CDH4のインストール</h2>
+
+<pre><code>$ wget http://archive.cloudera.com/cdh4/one-click-install/precise/amd64/cdh4-repository_1.0_all.deb
+$ sudo dpkg -i cdh4-repository_1.0_all.deb
+$ curl -s http://archive.cloudera.com/cdh4/ubuntu/precise/amd64/cdh/archive.key | sudo apt-key add -
+
+$ sudo apt-get update
+$ sudo apt-get install hadoop-conf-pseudo
+</code></pre>
+
+<p>ディレクトリを確認。各種設定ファイルが格納されている。
+通常起動の場合は編集の必要はない。</p>
+
+<pre><code>$ ls -l /etc/hadoop/conf.pseudo
+total 40
+-rw-r--r-- 1 root hadoop 1458 Feb 26 09:54 core-site.xml
+-rw-r--r-- 1 root hadoop 1364 Feb 26 09:54 hadoop-env.sh
+-rw-r--r-- 1 root hadoop 2890 Feb 26 09:54 hadoop-metrics.properties
+-rw-r--r-- 1 root hadoop 1875 Feb 26 09:54 hdfs-site.xml
+-rw-r--r-- 1 root hadoop 8735 Feb 26 10:21 log4j.properties
+-rw-r--r-- 1 root hadoop 1549 Feb 26 09:54 mapred-site.xml
+-rw-r--r-- 1 root hadoop 1104 Feb 26 09:54 README
+-rw-r--r-- 1 root hadoop 2361 Feb 26 09:54 yarn-site.xml
+</code></pre>
+
+<h2>HDFS /tmp directory を作成する</h2>
+
+<p>hdfsユーザでHDFSのフォーマットを実施する。
+<code>
+$ sudo -u hdfs
+$ hdfs namenode -format
+</code></p>
+
+<p>HDFSを起動。
+<code>
+$ /etc/init.d/hadoop-hdfs-namenode
+$ /etc/init.d/hadoop-hdfs-datanode
+$ /etc/init.d/hadoop-hdfs-secondarynamenode
+</code>
+とすれば良いけど、毎回このコマンドを打つのは面倒なので以下の様なスクリプト（hadoop-hdfs-start）を作っておく。
+&#8220;`</p>
+
+<h1>!/bin/bash</h1>
+
+<p>for service in /etc/init.d/hadoop-hdfs-*
+do
+sudo $service start
+done
+&#8220;`
+停止の場合も同様。以下の様なスクリプト（hadoop-hdfs-stop）を作っておくとラク。</p>
+
+<pre><code>#!/bin/bash
+for service in /etc/init.d/hadoop-hdfs-*
+do
+sudo $service stop
+done
+</code></pre>
+
+<p>起動を実行したら、各サービスが起動していることを確認する。
+<code>
+$ sudo $JAVA_HOME/bin/jps
+4233 Jps
+2476 NodeManager
+2007 SecondaryNameNode
+2622 ResourceManager
+1827 NameNode
+1652 DataNode
+</code></p>
+
+<h2>必要なDirectoryを作成する</h2>
+
+<p>HDFS上に必要なディレクトリを作成していく。この作業もhdfsユーザで実施する。</p>
+
+<pre><code>$ sudo su - hdfs
+$ hadoop fs -mkdir /tmp　←HDFS上に/tmpを作成
+$ hadoop fs -chmod -R 1777 /tmp
+$ hadoop fs -mkdir /var/log/hadoop-yarn
+$ hadoop fs -chown yarn:mapred /var/log/hadoop-yarn
+$ hadoop fs -mkdir /tmp/hadoop-yarn/staging
+$ hadoop fs -chmod -R 1777 /tmp/hadoop-yarn/staging
+$ hadoop fs -mkdir /tmp/hadoop-yarn/staging/history/done_intermediate
+$ hadoop fs -chmod -R 1777 /tmp/hadoop-yarn/staging/history/done_intermediate
+$ hadoop fs -mkdir /user/$USER　←hdfsユーザのホームディレクトリ/user/hdfs
+$ hadoop fs -chown hdfs /user/$USER
+</code></pre>
+
+<p>/user/hdfsが作業ディレクトリと考えてよい。上記実行中エラーが出て中断するようなら、HDFSが落ちている可能性があるので起動状態を確認してみる。</p>
+
+<p>HDFS上のlsは以下のようにして実行する。上記で作ったtmp,user,varができてればOK。
+<code>
+$ hadoop fs -ls /
+Found 3 items
+drwxrwxrwt – hdfs supergroup 0 2013-01-05 12:10 /tmp
+drwxr-xr-x – hdfs supergroup 0 2013-01-05 12:36 /user
+drwxr-xr-x – hdfs supergroup 0 2013-01-05 12:09 /var
+</code></p>
+
+<h2>Start YARN !!!!!</h2>
+
+<p>管理ユーザにスイッチしてYARN (MapReduce)を起動する。
+<code>
+$ sudo service hadoop-yarn-resourcemanager start
+$ sudo service hadoop-yarn-nodemanager start
+$ sudo service hadoop-mapreduce-historyserver start
+</code></p>
+
+<p>プロセスの確認。以下の様な感じになっていればOK。</p>
+
+<pre><code>$ sudo $JAVA_HOME/bin/jps
+2598 ResourceManager
+4798 JobHistoryServer
+4840 Jps
+1752 NameNode
+2448 NodeManager
+2043 SecondaryNameNode
+1496 DataNode
+</code></pre>
+
+<h1>おまけ）Hiveをインストールして使ってみる</h1>
+
+<h2>Hiveのインストール</h2>
+
+<p>以下の手順でHiveをインストールする。
+<code>
+$ cd Downloads/
+$ mkdir hive
+$ cd hive/
+$ wget http://mirror.tcpdiag.net/apache/hive/stable/hive-0.11.0.tar.gz
+$ tar xzf hive-0.11.0.tar.gz
+$ mkdir /usr/lib/hive
+$ mv hive-0.11.0 /usr/lib/hive/hive-0.11.0
+</code></p>
+
+<p>環境変数を設定する。
+<code>
+$ cd
+$ vim .bashrc
+$ export HIVE_HOME=/usr/lib/hive/hive-0.11.0
+$ export PATH=$PATH:$HIVE_HOME/bin
+</code></p>
+
+<h3>Login</h3>
+
+<pre><code>$ hive
+...
+..
+.
+
+hive&gt;
+</code></pre>
+
+<p>でOK。</p>
+
+<h2>Sample : Create Table</h2>
+
+<p>Tableを作成して、CSV形式のファイルをロードしてみる。
+<code>
+hive&gt; create table cats (id int, name string, birthday string) row format delimited fields terminated by ',' lines terminated by '\n';
+</code></p>
+
+<p>csv形式のファイルを以下のように用意する。
+&#8220;`
+$ vim cats.csv</p>
+
+<p>1,Tama,19929423
+2,Tora,19930304
+3,Nya,19930304</p>
+
+<pre><code>
+以下のコマンドでロード出来る。
+</code></pre>
+
+<p>hive> load data local inpath &lsquo;/root/hadoop/hive/cats.csv&rsquo; overwrite into table cats;
+&#8220;`</p>
+]]></content>
+  </entry>
+  
+</feed>

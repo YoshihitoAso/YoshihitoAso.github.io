@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-25T22:33:35+09:00</updated>
+  <updated>2014-08-26T21:47:43+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -31,7 +31,9 @@
 <!-- more -->
 
 
-<p>ネットで調べたところ、原因としては新しい書式設定をするたびにExcelがそのセルの書式パターンをスタイルとして過去分も蓄積するためらしい。これが例えばExcel2007であれば、64000パターンを超えると上記のエラーが出るようだ。</p>
+<p>ネットで調べたところ、原因としては新しい書式設定をするたびにExcelがそのセルの書式パターンをスタイルとして過去分も蓄積するためらしい。</p>
+
+<p>これが例えばExcel2007であれば、64000パターンを超えると上記のエラーが出るようだ。</p>
 
 <p>Excelのホームタブで「スタイル」のところのプルダウンに大量に書式が出てきたら、このエラーが出やすくなっている資料なので、使い回す際は気をつけろということになる。</p>
 
@@ -176,6 +178,13 @@
 <!-- more -->
 
 
+
+
+<iframe src="https://www.flickr.com/photos/koyhoge/15010405316/in/set-72157646842871822/player/" width="640" height="428" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+
+
+<h2>タイムテーブル</h2>
+
 <p>当日のタイムテーブルは<a href="http://ll.jus.or.jp/2014/timetable">こちら</a>から。</p>
 
 <p>自分が聞いたのは以下の公演。</p>
@@ -190,7 +199,7 @@
 </ul>
 
 
-<h1>○○ as Code</h1>
+<h2>○○ as Code</h2>
 
 <p>パネリストは以下の4名</p>
 
@@ -202,7 +211,7 @@
 </ul>
 
 
-<h2>インフラのCode化：高野さん（ニフティクラウド）</h2>
+<h4>インフラのCode化：高野さん（ニフティクラウド）</h4>
 
 <p>インフラのCode化</p>
 
@@ -227,7 +236,7 @@
 </ul>
 
 
-<h2>農業のCode化：前佛さん</h2>
+<h4>農業のCode化：前佛さん</h4>
 
 <p>現在の農業ソリューションは高価である。
 農業分野にもOSSやクラウドコンピューティングの考えが導入出来ないか？と考えている。</p>
@@ -270,7 +279,7 @@
 </ul>
 
 
-<h2>工業のCode化：吉田さん（株式会社スマメ代表など）</h2>
+<h4>工業のCode化：吉田さん（株式会社スマメ代表など）</h4>
 
 <p>3Dプリンタ関連の導入支援を行っている（DMM.makeとか）。その他にしぶや図工室、Fabbitなど。</p>
 
@@ -299,10 +308,13 @@
 </ul>
 
 
-<h2>ディスカッション</h2>
+<h4>ディスカッション</h4>
 
-<p>Googleカーみたいなものは農業分野で役立つか？みたいな話があった。
-これについては、まだやや飛躍気味で、機械学習が出来るような知見がたまるまでに少し時間がかかるだろうという話であった。それよりももっと細かいところでの改善がまだまだ必要で、田んぼに引き込む水量の制御など、自動化出来るところがまだまだあるのでは？といった話がされていた。</p>
+<p>Googleカーみたいなものは農業分野で役立つか？みたいな話があった。</p>
+
+<p>これについては、まだやや飛躍気味で、機械学習が出来るような知見がたまるまでに少し時間がかかるだろうという話であった。</p>
+
+<p>それよりももっと細かいところでの改善がまだまだ必要で、田んぼに引き込む水量の制御など、自動化出来るところがまだまだあるのでは？といった話がされていた。</p>
 
 <p>農業分野に3Dプリンタが生かせないか？みたいな話があった。</p>
 
@@ -312,7 +324,9 @@
 </ul>
 
 
-<h1>HerokuでGauche (あるいは、好きな言語何でも)：久井亨さん</h1>
+<h2>HerokuでGauche (あるいは、好きな言語何でも)：久井亨さん</h2>
+
+<p><a href="http://torus.github.io/raytracer/ll2014/#slide1">Heroku で Gauche（あるいは好きな言語なんでも）</a></p>
 
 <p>Herokuは色々な言語が使える。ただし、GaucheのようなScheme処理系はサポートされていない。</p>
 
@@ -339,7 +353,12 @@
 
 <p>ただし、Ubuntu10.04でコンパイルする必要がある。Dockerを使うと便利。</p>
 
-<h1>PythonによるWebスクレイピング入門：関根裕紀さん</h1>
+<h2>PythonによるWebスクレイピング入門：関根裕紀さん</h2>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/38279221" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/checkpoint77/pythonweb-38279221" title="PythonによるWebスクレイピング入門" target="_blank">PythonによるWebスクレイピング入門</a> </strong> from <strong><a href="http://www.slideshare.net/checkpoint77" target="_blank">checkpoint77</a></strong> </div></p>
 
 <p>Webスクレイピングの方法</p>
 
@@ -356,6 +375,17 @@
 -   scrapy</p>
 
 <p>それぞれ特徴があり、できる事も違う。用途によって使い分ける感じになると思う。</p>
+
+<h2>その他のスライドのありか</h2>
+
+<h3>GMOペパボのエンジニア新人研修</h3>
+
+<p><a href="http://blog.kentarok.org/entry/2014/08/23/145417">GMOペパボのエンジニア新人研修 #lldiver - delirious thoughts</a></p>
+
+<script async class="speakerdeck-embed" data-id="d0e869100cb601321e855e226fb19d76" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+
 ]]></content>
   </entry>
   
