@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ll | /var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/blog/categories/ll/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-26T21:47:43+09:00</updated>
+  <updated>2014-08-27T13:11:54+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -32,11 +32,13 @@
 <iframe src="https://www.flickr.com/photos/koyhoge/15010405316/in/set-72157646842871822/player/" width="640" height="428" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
 
 
+<p>※かなり自分の言葉に置き直している箇所があるので、解釈としておかしな部分もあるかもしれません。予めご了承ください。</p>
+
 <h2>タイムテーブル</h2>
 
-<p>当日のタイムテーブルは<a href="http://ll.jus.or.jp/2014/timetable">こちら</a>から。</p>
+<p>当日のタイムテーブルは<a href="http://ll.jus.or.jp/2014/timetable">こちら</a>から確認出来る。</p>
 
-<p>自分が聞いたのは以下の公演。</p>
+<p>自分が聞いたのは以下のセッションです。</p>
 
 <ul>
 <li>○○ as Code</li>
@@ -50,7 +52,7 @@
 
 <h2>○○ as Code</h2>
 
-<p>パネリストは以下の4名</p>
+<p>パネリストは以下の4名でした。</p>
 
 <ul>
 <li>高野祥幸さん</li>
@@ -62,17 +64,18 @@
 
 <h4>インフラのCode化：高野さん（ニフティクラウド）</h4>
 
-<p>インフラのCode化</p>
+<p>まずニフティクラウドの高野さんからインフラのCode化についての話がありました。</p>
+
+<p>例えば、ニフティクラウドではインフラをコード（サンプルはJavaだった）から制御出来るようになっている。</p>
 
 <ul>
 <li>インフラ as Code：　インスタンス起動など</li>
 <li>ミドルウェア as Code：　DBをたてる（バックアップの設定なども可能）など</li>
 <li>バックエンド as Code：　よりインフラを隠蔽化されていたり</li>
-<li>例えば、ニフティクラウドではインフラをコード（サンプルはJavaだった）から出来るようになっている</li>
 </ul>
 
 
-<p>システム開発の各工程（要件定義、設計、開発、テスト、リリース）をCode化</p>
+<p>続いて、システム開発における各工程（要件定義、設計、開発、テスト、リリース）をCode化についての話がありました。</p>
 
 <ul>
 <li>各工程はコード化されている</li>
@@ -81,20 +84,21 @@
 <li>テスト：SeleniumとかXUnitとか、コードを書いてテストする</li>
 <li>リリース：AnsibleやChefでコード化出来る</li>
 <li>唯一要件定義工程がコード化されていない。</li>
-<li>無いならなくせば？という発想で今考え始めているところ。答えはまだ無い。</li>
+<li>コード化出来ないならなくせば？という発想で今考え始めているところ。答えはまだ無い。</li>
 </ul>
 
 
 <h4>農業のCode化：前佛さん</h4>
 
-<p>現在の農業ソリューションは高価である。
-農業分野にもOSSやクラウドコンピューティングの考えが導入出来ないか？と考えている。</p>
+<p>農業のシステム化が語られることが多くなったが、提供されている農業ソリューションが高価すぎるという問題がある。</p>
 
-<p>運用監視の自動化</p>
+<p>農業分野にもOSSやクラウドコンピューティングの考えが導入出来ないか？と考えている。</p>
+
+<p>運用監視の自動化の話。</p>
 
 <ul>
 <li>昔に比べてサービスが落ちた時の影響度が甚大である</li>
-<li>全て人手では難しい。運用の自動化・Code化。</li>
+<li>全て人手では運用が回らない状態。運用の自動化・Code化が必要。</li>
 <li>運用監視としてMuninやZabix、オーケストレーションツール（Serf、Consul）などで自動化したり。</li>
 <li>運用のコード化の流れ
 
@@ -107,22 +111,22 @@
 </ul>
 
 
-<p>農業への適用を考えたい</p>
+<p>農業への適用を考えたいという話。</p>
 
 <ul>
-<li>牛→餌の食わない牛（機械）へ</li>
+<li>農具で言うと、牛→餌の食わない牛（機械）へと変化していった</li>
 <li>なぜ農業で自動化・コード化が必要？
 
 <ul>
 <li>人が足りてない</li>
-<li>商品での差別化は難しい</li>
+<li>商品での差別化は難しい（例えば稲作とか）</li>
 </ul>
 </li>
 <li>重要になってくる分野
 
 <ul>
 <li>情報化、自動化、ロボット技術</li>
-<li>流れの中でslack, hubotを利用してみたら良いかもみたいな話があった。</li>
+<li>流れの中でコミュニケーション用のツールとしてslack, hubotを利用してみたら良いかもみたいな話があった。</li>
 </ul>
 </li>
 </ul>
@@ -175,7 +179,7 @@
 
 <h2>HerokuでGauche (あるいは、好きな言語何でも)：久井亨さん</h2>
 
-<p><a href="http://torus.github.io/raytracer/ll2014/#slide1">Heroku で Gauche（あるいは好きな言語なんでも）</a></p>
+<p>資料のありか：<a href="http://torus.github.io/raytracer/ll2014/#slide1">Heroku で Gauche（あるいは好きな言語なんでも）</a></p>
 
 <p>Herokuは色々な言語が使える。ただし、GaucheのようなScheme処理系はサポートされていない。</p>
 
@@ -217,11 +221,15 @@
 </ul>
 
 
-<p>pythonの場合は以下の選択肢がある
--   標準ライブラリ　urllib2
--   beautiful soup
--   pyquery
--   scrapy</p>
+<p>pythonの場合は以下の選択肢がある</p>
+
+<ul>
+<li>標準ライブラリ　urllib2</li>
+<li>beautiful soup</li>
+<li>pyquery</li>
+<li>scrapy</li>
+</ul>
+
 
 <p>それぞれ特徴があり、できる事も違う。用途によって使い分ける感じになると思う。</p>
 
