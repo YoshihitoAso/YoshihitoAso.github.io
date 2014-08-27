@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>PythonからMongoDBを操作する - /var/log/aso.log</title>
+  <title>PythonからHiveServer2に接続する方法 - /var/log/aso.log</title>
   <meta name="author" content="Yoshihito Aso">
 
   
-  <meta name="description" content="以前、Ubuntu上にMongoDBをインストールしてみました。 今回は、MongoDBをPythonから操作する方法についてまとめておくことにします。 PyMongoのインストール方法 pythonから利用するためのモジュールとしてPyMongoを利用します。 インストール方法は簡単で、 &hellip;">
+  <meta name="description" content="PythonからHiveQLを実行したかったので、HiveServerを利用しました。 簡単な設定のメモ書きを残しておきます。 HiveServer2について 自分は以下の資料などを利用して理解を深めていった。 HiveServer2 from Schubert Zhang &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/2014/08/27/pymongo/">
+  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/2014/08/27/pyhs2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -73,7 +73,7 @@
   
   <header>
     
-      <h1 class="entry-title">PythonからMongoDBを操作する</h1>
+      <h1 class="entry-title">PythonからHiveServer2に接続する方法</h1>
     
     
       <p class="meta">
@@ -89,35 +89,68 @@
   
 
 
-<time datetime="2014-08-27T13:14:26+09:00" pubdate data-updated="true">Aug 27<sup>th</sup>, 2014</time>
+<time datetime="2014-08-27T15:15:50+09:00" pubdate data-updated="true">Aug 27<sup>th</sup>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p><a href="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/">以前</a>、Ubuntu上にMongoDBをインストールしてみました。</p>
+<div class="entry-content"><p>PythonからHiveQLを実行したかったので、HiveServerを利用しました。</p>
 
-<p>今回は、MongoDBをPythonから操作する方法についてまとめておくことにします。</p>
+<p>簡単な設定のメモ書きを残しておきます。</p>
 
 <!-- more -->
 
 
-<h2>PyMongoのインストール方法</h2>
+<h2>HiveServer2について</h2>
 
-<p>pythonから利用するためのモジュールとしてPyMongoを利用します。</p>
+<p>自分は以下の資料などを利用して理解を深めていった。</p>
 
-<p>インストール方法は簡単で、pipであれば以下でOK。</p>
+<iframe src="//www.slideshare.net/slideshow/embed_code/28060369" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/schubertzhang/hiveserver2" title="HiveServer2" target="_blank">HiveServer2</a> </strong> from <strong><a href="http://www.slideshare.net/schubertzhang" target="_blank">Schubert Zhang</a></strong> </div></p>
+
+<p>Clientについてはオフィシャルから。</p>
+
+<p><a href="https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Clients">HiveServer2 Clients - Apache Hive - Apache Software Foundation</a></p>
+
+<h2>HiveServer2の起動</h2>
+
+<p>CDH4をインストール済みであれば、HiveServer2の起動は以下のようにして行える。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ pip install pymongo</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ service hive-server2 start</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>サンプル</h2>
+<p>jpsで起動状態の確認を行う。</p>
 
-<p>pymongoを利用したMongoDB接続のサンプル（localhost接続の例）</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># jps
+</span><span class='line'>:
+</span><span class='line'>:
+</span><span class='line'>2901 RunJar　←HiveServer2のプロセス
+</span><span class='line'>:</span></code></pre></td></tr></table></div></figure>
 
-<p>①検索（find）</p>
+
+<h2>PythonからHiveServer2に接続（pyhs2）</h2>
+
+<p>PythonからHiveServer2に接続して操作するためには、HiveSever2用クライアントドライバをインストールする必要がある。</p>
+
+<p>オフィシャルドキュメント（ <a href="https://cwiki.apache.org/confluence/display/Hive/Setting+Up+HiveServer2#SettingUpHiveServer2-PythonClientDriver">https://cwiki.apache.org/confluence/display/Hive/Setting+Up+HiveServer2#SettingUpHiveServer2-PythonClientDriver</a> ）にそって、ここではpyhs2を利用することにする。</p>
+
+<p>pyhs2のインストールはpipでOK。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ pip install pyhs2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>HiveServer2を起動した状態で以下の様なサンプルプログラム(thrift_sample.py)を動かしてみる。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -136,40 +169,48 @@
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>#!/usr/bin/env python
 </span><span class='line'># -*- coding:utf-8 -*-
 </span><span class='line'>
-</span><span class='line'>from pymongo import Connection
+</span><span class='line'>import pyhs2
 </span><span class='line'>
-</span><span class='line'>#コネクション作成
-</span><span class='line'>con = Connection('localhost', 27017)
-</span><span class='line'>
-</span><span class='line'>#コネクションからsampleデータベースを取得
-</span><span class='line'>db = con.sample
-</span><span class='line'>
-</span><span class='line'>#sampleデータベースからfooコレクションを取得
-</span><span class='line'>col = db.foo
-</span><span class='line'>
-</span><span class='line'>print "========find_one========"
-</span><span class='line'>print col.find_one()
-</span><span class='line'>
-</span><span class='line'>print "========find========"
-</span><span class='line'>for data in col.find():
-</span><span class='line'>    print data
-</span><span class='line'>
-</span><span class='line'>print "========find_query========"
-</span><span class='line'>for data in col.find({u'a':10}):
-</span><span class='line'>    print data</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>conn = pyhs2.connect(host='localhost',
+</span><span class='line'>                  port=10000,
+</span><span class='line'>                  authMechanism="PLAIN",
+</span><span class='line'>                  user='root',
+</span><span class='line'>                  password='test',
+</span><span class='line'>                  database='default')
+</span><span class='line'>cur = conn.cursor()
+</span><span class='line'>cur.execute("show tables")
+</span><span class='line'>for i in cur.fetch():
+</span><span class='line'>  print i
+</span><span class='line'>cur.close()
+</span><span class='line'>conn.close()</span></code></pre></td></tr></table></div></figure>
 
 
-<p>②データの登録（insert）</p>
+<p>しかし、今の状態だと以下の様なエラーが出ると思われる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ python thrift_sample.py
+</span><span class='line'>Traceback (most recent call last):
+</span><span class='line'>  File "thrift_sample.py", line 27, in &lt;module&gt;
+</span><span class='line'>    database='default')
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/pyhs2/__init__.py", line 6, in connect
+</span><span class='line'>    from .connections import Connection
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/pyhs2/connections.py", line 6, in &lt;module&gt;
+</span><span class='line'>    import sasl
+</span><span class='line'>ImportError: No module named sasl</span></code></pre></td></tr></table></div></figure>
+
+
+<p>pyhs2の依存パッケージ（sasl）をインストールする必要がある。そのままsaslをpipでインストールしてみると以下のようなエラーが出るはず。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -184,140 +225,34 @@
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!/usr/bin/env python
-</span><span class='line'># -*- coding:utf-8 -*-
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ pip install sasl
+</span><span class='line'>:
+</span><span class='line'>:
+</span><span class='line'>gcc -pthread -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -fPIC -Isasl -I/usr/include/python2.7 -c sasl/saslwrapper.cpp -o build/temp.linux-x86_64-2.7/sasl/saslwrapper.o
 </span><span class='line'>
-</span><span class='line'>from pymongo import Connection
+</span><span class='line'>cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++ [enabled by default]
 </span><span class='line'>
-</span><span class='line'>#コネクション作成
-</span><span class='line'>con = Connection('localhost', 27017)
+</span><span class='line'>sasl/saslwrapper.cpp:21:23: fatal error: sasl/sasl.h: No such file or directory
 </span><span class='line'>
-</span><span class='line'>#コネクションからsampleデータベースを取得
-</span><span class='line'>db = con.sample
+</span><span class='line'>compilation terminated.
 </span><span class='line'>
-</span><span class='line'>#sampleデータベースからfooコレクションを取得
-</span><span class='line'>col = db.foo
-</span><span class='line'>
-</span><span class='line'>#データの更新
-</span><span class='line'>col.insert({'b' : 10})
-</span><span class='line'>
-</span><span class='line'>for data in col.find({'b':10}):
-</span><span class='line'>    print data</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>error: command 'gcc' failed with exit status 1
+</span><span class='line'>:</span></code></pre></td></tr></table></div></figure>
 
 
-<p>※ちなみにinsertは何度でも実行可能。その場合、レコード単位に新たなObjectIdが付与される。</p>
-
-<p>③更新</p>
+<p>libsasl2-devをインストールする必要がある。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!/usr/bin/env python
-</span><span class='line'># -*- coding:utf-8 -*-
-</span><span class='line'>
-</span><span class='line'>from pymongo import Connection
-</span><span class='line'>
-</span><span class='line'>#コネクション作成
-</span><span class='line'>con = Connection('localhost', 27017)
-</span><span class='line'>
-</span><span class='line'>#コネクションからsampleデータベースを取得
-</span><span class='line'>db = con.sample
-</span><span class='line'>
-</span><span class='line'>#sampleデータベースからfooコレクションを取得
-</span><span class='line'>col = db.foo
-</span><span class='line'>
-</span><span class='line'>data = col.find_one({'b':10})
-</span><span class='line'>data['b'] = 11
-</span><span class='line'>#データの更新
-</span><span class='line'>col.save(data)
-</span><span class='line'>
-</span><span class='line'>for data in col.find({u'b':11}):
-</span><span class='line'>    print data
-</span><span class='line'>
-</span><span class='line'>con.disconnect()</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install libsasl2-dev</span></code></pre></td></tr></table></div></figure>
 
 
-<p>④データの削除(remove)</p>
+<p>もう一度実行⇒OK</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>#!/usr/bin/env python
-</span><span class='line'># -*- coding:utf-8 -*-
-</span><span class='line'>
-</span><span class='line'>from pymongo import Connection
-</span><span class='line'>
-</span><span class='line'>#コネクション作成
-</span><span class='line'>con = Connection('localhost', 27017)
-</span><span class='line'>
-</span><span class='line'>#コネクションからsampleデータベースを取得
-</span><span class='line'>db = con.sample
-</span><span class='line'>
-</span><span class='line'>#sampleデータベースからfooコレクションを取得
-</span><span class='line'>col = db.foo
-</span><span class='line'>
-</span><span class='line'>print "===before==="
-</span><span class='line'>for data in col.find():
-</span><span class='line'>    print data
-</span><span class='line'>
-</span><span class='line'>col.remove({'b':11})
-</span><span class='line'>
-</span><span class='line'>print "===after==="
-</span><span class='line'>for data in col.find():
-</span><span class='line'>    print data
-</span><span class='line'>
-</span><span class='line'>con.disconnect()</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ pip install sasl</span></code></pre></td></tr></table></div></figure>
 
 
-
+<p>これでもう一度上記のサンプルプログラム（thrift_sample.py）を実行すればうまく動く（はず）。</p>
 </div>
 
 
@@ -340,12 +275,12 @@
   
 
 
-<time datetime="2014-08-27T13:14:26+09:00" pubdate data-updated="true">Aug 27<sup>th</sup>, 2014</time>
+<time datetime="2014-08-27T15:15:50+09:00" pubdate data-updated="true">Aug 27<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/mongodb/'>mongodb</a>, <a class='category' href='/blog/categories/python/'>python</a>
+    <a class='category' href='/blog/categories/hive/'>hive</a>, <a class='category' href='/blog/categories/hiveserver/'>hiveserver</a>, <a class='category' href='/blog/categories/python/'>python</a>
   
 </span>
 
@@ -354,7 +289,7 @@
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yoshihitoaso.github.io/blog/2014/08/27/pymongo/" data-via="y_asoh" data-counturl="http://yoshihitoaso.github.io/blog/2014/08/27/pymongo/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yoshihitoaso.github.io/blog/2014/08/27/pyhs2/" data-via="y_asoh" data-counturl="http://yoshihitoaso.github.io/blog/2014/08/27/pyhs2/" >Tweet</a>
   
   
   
@@ -363,10 +298,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/08/25/clear-excel-formats/" title="Previous Post: Excelシートの書式をマクロですべて削除する">&laquo; Excelシートの書式をマクロですべて削除する</a>
+        <a class="basic-alignment left" href="/blog/2014/08/27/pymongo/" title="Previous Post: PythonからMongoDBを操作する">&laquo; PythonからMongoDBを操作する</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/08/27/pyhs2/" title="Next Post: PythonからHiveServer2に接続する方法">PythonからHiveServer2に接続する方法 &raquo;</a>
       
     </p>
   </footer>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: hive | /var/log/aso.log]]></title>
+  <link href="http://yoshihitoaso.github.io/blog/categories/hive/atom.xml" rel="self"/>
+  <link href="http://yoshihitoaso.github.io/"/>
+  <updated>2014-08-27T15:35:51+09:00</updated>
+  <id>http://yoshihitoaso.github.io/</id>
+  <author>
+    <name><![CDATA[Yoshihito Aso]]></name>
+    <email><![CDATA[yoshihito.asoh@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PythonからHiveServer2に接続する方法]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/27/pyhs2/"/>
+    <updated>2014-08-27T15:15:50+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/27/pyhs2</id>
+    <content type="html"><![CDATA[<p>PythonからHiveQLを実行したかったので、HiveServerを利用しました。</p>
+
+<p>簡単な設定のメモ書きを残しておきます。</p>
+
+<!-- more -->
+
+
+<h2>HiveServer2について</h2>
+
+<p>自分は以下の資料などを利用して理解を深めていった。</p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/28060369" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/schubertzhang/hiveserver2" title="HiveServer2" target="_blank">HiveServer2</a> </strong> from <strong><a href="http://www.slideshare.net/schubertzhang" target="_blank">Schubert Zhang</a></strong> </div></p>
+
+<p>Clientについてはオフィシャルから。</p>
+
+<p><a href="https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Clients">HiveServer2 Clients - Apache Hive - Apache Software Foundation</a></p>
+
+<h2>HiveServer2の起動</h2>
+
+<p>CDH4をインストール済みであれば、HiveServer2の起動は以下のようにして行える。
+<code>
+$ service hive-server2 start
+</code></p>
+
+<p>jpsで起動状態の確認を行う。
+&#8220;`</p>
+
+<h1>jps</h1>
+
+<p>:
+:
+2901 RunJar　←HiveServer2のプロセス
+:
+&#8220;`</p>
+
+<h2>PythonからHiveServer2に接続（pyhs2）</h2>
+
+<p>PythonからHiveServer2に接続して操作するためには、HiveSever2用クライアントドライバをインストールする必要がある。</p>
+
+<p>オフィシャルドキュメント（ <a href="https://cwiki.apache.org/confluence/display/Hive/Setting+Up+HiveServer2#SettingUpHiveServer2-PythonClientDriver">https://cwiki.apache.org/confluence/display/Hive/Setting+Up+HiveServer2#SettingUpHiveServer2-PythonClientDriver</a> ）にそって、ここではpyhs2を利用することにする。</p>
+
+<p>pyhs2のインストールはpipでOK。
+<code>
+$ pip install pyhs2
+</code></p>
+
+<p>HiveServer2を起動した状態で以下の様なサンプルプログラム(thrift_sample.py)を動かしてみる。
+&#8220;`</p>
+
+<h1>!/usr/bin/env python</h1>
+
+<h1>-<em>- coding:utf-8 -</em>-</h1>
+
+<p>import pyhs2</p>
+
+<p>conn = pyhs2.connect(host=&lsquo;localhost&rsquo;,
+                    port=10000,
+                    authMechanism=&ldquo;PLAIN&rdquo;,
+                    user=&lsquo;root&rsquo;,
+                    password=&lsquo;test&rsquo;,
+                    database=&lsquo;default&rsquo;)
+cur = conn.cursor()
+cur.execute(&ldquo;show tables&rdquo;)
+for i in cur.fetch():
+    print i
+cur.close()
+conn.close()
+&#8220;`</p>
+
+<p>しかし、今の状態だと以下の様なエラーが出ると思われる。
+<code>
+$ python thrift_sample.py
+Traceback (most recent call last):
+  File "thrift_sample.py", line 27, in &lt;module&gt;
+    database='default')
+  File "/usr/local/lib/python2.7/dist-packages/pyhs2/__init__.py", line 6, in connect
+    from .connections import Connection
+  File "/usr/local/lib/python2.7/dist-packages/pyhs2/connections.py", line 6, in &lt;module&gt;
+    import sasl
+ImportError: No module named sasl
+</code>
+pyhs2の依存パッケージ（sasl）をインストールする必要がある。そのままsaslをpipでインストールしてみると以下のようなエラーが出るはず。
+&#8220;`
+$ pip install sasl
+:
+:
+gcc -pthread -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -fPIC -Isasl -I/usr/include/python2.7 -c sasl/saslwrapper.cpp -o build/temp.linux-x86_64-2.7/sasl/saslwrapper.o</p>
+
+<p>cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++ [enabled by default]</p>
+
+<p>sasl/saslwrapper.cpp:21:23: fatal error: sasl/sasl.h: No such file or directory</p>
+
+<p>compilation terminated.</p>
+
+<p>error: command &lsquo;gcc&rsquo; failed with exit status 1
+:
+&#8220;`</p>
+
+<p>libsasl2-devをインストールする必要がある。
+<code>
+$ sudo apt-get install libsasl2-dev
+</code></p>
+
+<p>もう一度実行⇒OK
+<code>
+$ pip install sasl
+</code></p>
+
+<p>これでもう一度上記のサンプルプログラム（thrift_sample.py）を実行すればうまく動く（はず）。</p>
+]]></content>
+  </entry>
+  
+</feed>

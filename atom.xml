@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-27T13:23:24+09:00</updated>
+  <updated>2014-08-27T15:35:51+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,6 +12,171 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PythonからHiveServer2に接続する方法]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/27/pyhs2/"/>
+    <updated>2014-08-27T15:15:50+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/27/pyhs2</id>
+    <content type="html"><![CDATA[<p>PythonからHiveQLを実行したかったので、HiveServerを利用しました。</p>
+
+<p>簡単な設定のメモ書きを残しておきます。</p>
+
+<!-- more -->
+
+
+<h2>HiveServer2について</h2>
+
+<p>自分は以下の資料などを利用して理解を深めていった。</p>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/28060369" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p> <div style="margin-bottom:5px"> <strong> <a href="https://www.slideshare.net/schubertzhang/hiveserver2" title="HiveServer2" target="_blank">HiveServer2</a> </strong> from <strong><a href="http://www.slideshare.net/schubertzhang" target="_blank">Schubert Zhang</a></strong> </div></p>
+
+<p>Clientについてはオフィシャルから。</p>
+
+<p><a href="https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Clients">HiveServer2 Clients - Apache Hive - Apache Software Foundation</a></p>
+
+<h2>HiveServer2の起動</h2>
+
+<p>CDH4をインストール済みであれば、HiveServer2の起動は以下のようにして行える。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ service hive-server2 start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>jpsで起動状態の確認を行う。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># jps
+</span><span class='line'>:
+</span><span class='line'>:
+</span><span class='line'>2901 RunJar　←HiveServer2のプロセス
+</span><span class='line'>:</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>PythonからHiveServer2に接続（pyhs2）</h2>
+
+<p>PythonからHiveServer2に接続して操作するためには、HiveSever2用クライアントドライバをインストールする必要がある。</p>
+
+<p>オフィシャルドキュメント（ <a href="https://cwiki.apache.org/confluence/display/Hive/Setting+Up+HiveServer2#SettingUpHiveServer2-PythonClientDriver">https://cwiki.apache.org/confluence/display/Hive/Setting+Up+HiveServer2#SettingUpHiveServer2-PythonClientDriver</a> ）にそって、ここではpyhs2を利用することにする。</p>
+
+<p>pyhs2のインストールはpipでOK。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ pip install pyhs2</span></code></pre></td></tr></table></div></figure>
+
+
+<p>HiveServer2を起動した状態で以下の様なサンプルプログラム(thrift_sample.py)を動かしてみる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/usr/bin/env python
+</span><span class='line'># -*- coding:utf-8 -*-
+</span><span class='line'>
+</span><span class='line'>import pyhs2
+</span><span class='line'>
+</span><span class='line'>conn = pyhs2.connect(host='localhost',
+</span><span class='line'>                  port=10000,
+</span><span class='line'>                  authMechanism="PLAIN",
+</span><span class='line'>                  user='root',
+</span><span class='line'>                  password='test',
+</span><span class='line'>                  database='default')
+</span><span class='line'>cur = conn.cursor()
+</span><span class='line'>cur.execute("show tables")
+</span><span class='line'>for i in cur.fetch():
+</span><span class='line'>  print i
+</span><span class='line'>cur.close()
+</span><span class='line'>conn.close()</span></code></pre></td></tr></table></div></figure>
+
+
+<p>しかし、今の状態だと以下の様なエラーが出ると思われる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ python thrift_sample.py
+</span><span class='line'>Traceback (most recent call last):
+</span><span class='line'>  File "thrift_sample.py", line 27, in &lt;module&gt;
+</span><span class='line'>    database='default')
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/pyhs2/__init__.py", line 6, in connect
+</span><span class='line'>    from .connections import Connection
+</span><span class='line'>  File "/usr/local/lib/python2.7/dist-packages/pyhs2/connections.py", line 6, in &lt;module&gt;
+</span><span class='line'>    import sasl
+</span><span class='line'>ImportError: No module named sasl</span></code></pre></td></tr></table></div></figure>
+
+
+<p>pyhs2の依存パッケージ（sasl）をインストールする必要がある。そのままsaslをpipでインストールしてみると以下のようなエラーが出るはず。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ pip install sasl
+</span><span class='line'>:
+</span><span class='line'>:
+</span><span class='line'>gcc -pthread -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -fPIC -Isasl -I/usr/include/python2.7 -c sasl/saslwrapper.cpp -o build/temp.linux-x86_64-2.7/sasl/saslwrapper.o
+</span><span class='line'>
+</span><span class='line'>cc1plus: warning: command line option ‘-Wstrict-prototypes’ is valid for C/ObjC but not for C++ [enabled by default]
+</span><span class='line'>
+</span><span class='line'>sasl/saslwrapper.cpp:21:23: fatal error: sasl/sasl.h: No such file or directory
+</span><span class='line'>
+</span><span class='line'>compilation terminated.
+</span><span class='line'>
+</span><span class='line'>error: command 'gcc' failed with exit status 1
+</span><span class='line'>:</span></code></pre></td></tr></table></div></figure>
+
+
+<p>libsasl2-devをインストールする必要がある。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install libsasl2-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p>もう一度実行⇒OK</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ pip install sasl</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでもう一度上記のサンプルプログラム（thrift_sample.py）を実行すればうまく動く（はず）。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PythonからMongoDBを操作する]]></title>
