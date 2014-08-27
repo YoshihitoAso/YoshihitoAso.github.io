@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-27T13:11:54+09:00</updated>
+  <updated>2014-08-27T13:21:43+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,6 +12,236 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PythonからMongoDBを操作する]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/27/pymongo/"/>
+    <updated>2014-08-27T13:14:26+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/27/pymongo</id>
+    <content type="html"><![CDATA[<p><a href="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/">以前</a>、Ubuntu上にMongoDBをインストールしてみました。</p>
+
+<p>今回は、MongoDBをPythonから操作する方法についてまとめておくことにします。</p>
+
+<!-- more -->
+
+
+<h2>PyMongoのインストール方法</h2>
+
+<p>pythonから利用するためのモジュールとしてPyMongoを利用します。</p>
+
+<p>インストール方法は簡単で、pipであれば以下でOK。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ pip install pymongo</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>サンプル</h2>
+
+<p>pymongoを利用したMongoDB接続のサンプル（localhost接続の例）</p>
+
+<p>①検索（find）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/usr/bin/env python
+</span><span class='line'># -*- coding:utf-8 -*-
+</span><span class='line'>
+</span><span class='line'>from pymongo import Connection
+</span><span class='line'>
+</span><span class='line'>#コネクション作成
+</span><span class='line'>con = Connection('localhost', 27017)
+</span><span class='line'>
+</span><span class='line'>#コネクションからsampleデータベースを取得
+</span><span class='line'>db = con.sample
+</span><span class='line'>
+</span><span class='line'>#sampleデータベースからfooコレクションを取得
+</span><span class='line'>col = db.foo
+</span><span class='line'>
+</span><span class='line'>print "========find_one========"
+</span><span class='line'>print col.find_one()
+</span><span class='line'>
+</span><span class='line'>print "========find========"
+</span><span class='line'>for data in col.find():
+</span><span class='line'>    print data
+</span><span class='line'>
+</span><span class='line'>print "========find_query========"
+</span><span class='line'>for data in col.find({u'a':10}):
+</span><span class='line'>    print data</span></code></pre></td></tr></table></div></figure>
+
+
+<p>②データの登録（insert）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/usr/bin/env python
+</span><span class='line'># -*- coding:utf-8 -*-
+</span><span class='line'>
+</span><span class='line'>from pymongo import Connection
+</span><span class='line'>
+</span><span class='line'>#コネクション作成
+</span><span class='line'>con = Connection('localhost', 27017)
+</span><span class='line'>
+</span><span class='line'>#コネクションからsampleデータベースを取得
+</span><span class='line'>db = con.sample
+</span><span class='line'>
+</span><span class='line'>#sampleデータベースからfooコレクションを取得
+</span><span class='line'>col = db.foo
+</span><span class='line'>
+</span><span class='line'>#データの更新
+</span><span class='line'>col.insert({'b' : 10})
+</span><span class='line'>
+</span><span class='line'>for data in col.find({'b':10}):
+</span><span class='line'>    print data</span></code></pre></td></tr></table></div></figure>
+
+
+<p>※ちなみにinsertは何度でも実行可能。その場合、レコード単位に新たなObjectIdが付与される。</p>
+
+<p>③更新</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/usr/bin/env python
+</span><span class='line'># -*- coding:utf-8 -*-
+</span><span class='line'>
+</span><span class='line'>from pymongo import Connection
+</span><span class='line'>
+</span><span class='line'>#コネクション作成
+</span><span class='line'>con = Connection('localhost', 27017)
+</span><span class='line'>
+</span><span class='line'>#コネクションからsampleデータベースを取得
+</span><span class='line'>db = con.sample
+</span><span class='line'>
+</span><span class='line'>#sampleデータベースからfooコレクションを取得
+</span><span class='line'>col = db.foo
+</span><span class='line'>
+</span><span class='line'>data = col.find_one({'b':10})
+</span><span class='line'>data['b'] = 11
+</span><span class='line'>#データの更新
+</span><span class='line'>col.save(data)
+</span><span class='line'>
+</span><span class='line'>for data in col.find({u'b':11}):
+</span><span class='line'>    print data
+</span><span class='line'>
+</span><span class='line'>con.disconnect()</span></code></pre></td></tr></table></div></figure>
+
+
+<p>④データの削除(remove)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#!/usr/bin/env python
+</span><span class='line'># -*- coding:utf-8 -*-
+</span><span class='line'>
+</span><span class='line'>from pymongo import Connection
+</span><span class='line'>
+</span><span class='line'>#コネクション作成
+</span><span class='line'>con = Connection('localhost', 27017)
+</span><span class='line'>
+</span><span class='line'>#コネクションからsampleデータベースを取得
+</span><span class='line'>db = con.sample
+</span><span class='line'>
+</span><span class='line'>#sampleデータベースからfooコレクションを取得
+</span><span class='line'>col = db.foo
+</span><span class='line'>
+</span><span class='line'>print "===before==="
+</span><span class='line'>for data in col.find():
+</span><span class='line'>    print data
+</span><span class='line'>
+</span><span class='line'>col.remove({'b':11})
+</span><span class='line'>
+</span><span class='line'>print "===after==="
+</span><span class='line'>for data in col.find():
+</span><span class='line'>    print data
+</span><span class='line'>
+</span><span class='line'>con.disconnect()</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Excelシートの書式をマクロですべて削除する]]></title>

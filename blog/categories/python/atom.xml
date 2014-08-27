@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | /var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-27T13:11:54+09:00</updated>
+  <updated>2014-08-27T13:21:43+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,6 +12,163 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[PythonからMongoDBを操作する]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/27/pymongo/"/>
+    <updated>2014-08-27T13:14:26+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/27/pymongo</id>
+    <content type="html"><![CDATA[<p><a href="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/">以前</a>、Ubuntu上にMongoDBをインストールしてみました。</p>
+
+<p>今回は、MongoDBをPythonから操作する方法についてまとめておくことにします。</p>
+
+<!-- more -->
+
+
+<h2>PyMongoのインストール方法</h2>
+
+<p>pythonから利用するためのモジュールとしてPyMongoを利用します。</p>
+
+<p>インストール方法は簡単で、pipであれば以下でOK。
+<code>
+$ pip install pymongo
+</code></p>
+
+<h2>サンプル</h2>
+
+<p>pymongoを利用したMongoDB接続のサンプル（localhost接続の例）</p>
+
+<p>①検索（find）
+&#8220;`</p>
+
+<h1>!/usr/bin/env python</h1>
+
+<h1>-<em>- coding:utf-8 -</em>-</h1>
+
+<p>from pymongo import Connection</p>
+
+<h1>コネクション作成</h1>
+
+<p>con = Connection(&lsquo;localhost&rsquo;, 27017)</p>
+
+<h1>コネクションからsampleデータベースを取得</h1>
+
+<p>db = con.sample</p>
+
+<h1>sampleデータベースからfooコレクションを取得</h1>
+
+<p>col = db.foo</p>
+
+<p>print &ldquo;========find_one========&rdquo;
+print col.find_one()</p>
+
+<p>print &ldquo;========find========&rdquo;
+for data in col.find():
+    print data</p>
+
+<p>print &ldquo;========find_query========&rdquo;
+for data in col.find({u&#8217;a&#8217;:10}):
+    print data
+&#8220;`</p>
+
+<p>②データの登録（insert）
+&#8220;`</p>
+
+<h1>!/usr/bin/env python</h1>
+
+<h1>-<em>- coding:utf-8 -</em>-</h1>
+
+<p>from pymongo import Connection</p>
+
+<h1>コネクション作成</h1>
+
+<p>con = Connection(&lsquo;localhost&rsquo;, 27017)</p>
+
+<h1>コネクションからsampleデータベースを取得</h1>
+
+<p>db = con.sample</p>
+
+<h1>sampleデータベースからfooコレクションを取得</h1>
+
+<p>col = db.foo</p>
+
+<h1>データの更新</h1>
+
+<p>col.insert({&lsquo;b&rsquo; : 10})</p>
+
+<p>for data in col.find({&lsquo;b&rsquo;:10}):
+    print data
+&#8220;`
+※ちなみにinsertは何度でも実行可能。その場合、レコード単位に新たなObjectIdが付与される。</p>
+
+<p>③更新
+&#8220;`</p>
+
+<h1>!/usr/bin/env python</h1>
+
+<h1>-<em>- coding:utf-8 -</em>-</h1>
+
+<p>from pymongo import Connection</p>
+
+<h1>コネクション作成</h1>
+
+<p>con = Connection(&lsquo;localhost&rsquo;, 27017)</p>
+
+<h1>コネクションからsampleデータベースを取得</h1>
+
+<p>db = con.sample</p>
+
+<h1>sampleデータベースからfooコレクションを取得</h1>
+
+<p>col = db.foo</p>
+
+<p>data = col.find_one({&lsquo;b&rsquo;:10})
+data[&lsquo;b&rsquo;] = 11</p>
+
+<h1>データの更新</h1>
+
+<p>col.save(data)</p>
+
+<p>for data in col.find({u&#8217;b&#8217;:11}):
+    print data</p>
+
+<p>con.disconnect()
+<code>
+④データの削除(remove)
+</code></p>
+
+<h1>!/usr/bin/env python</h1>
+
+<h1>-<em>- coding:utf-8 -</em>-</h1>
+
+<p>from pymongo import Connection</p>
+
+<h1>コネクション作成</h1>
+
+<p>con = Connection(&lsquo;localhost&rsquo;, 27017)</p>
+
+<h1>コネクションからsampleデータベースを取得</h1>
+
+<p>db = con.sample</p>
+
+<h1>sampleデータベースからfooコレクションを取得</h1>
+
+<p>col = db.foo</p>
+
+<p>print &ldquo;===before===&rdquo;
+for data in col.find():
+    print data</p>
+
+<p>col.remove({&lsquo;b&rsquo;:11})</p>
+
+<p>print &ldquo;===after===&rdquo;
+for data in col.find():
+    print data</p>
+
+<p>con.disconnect()
+&#8220;`</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[pyqueryでWebスクレイピング]]></title>
