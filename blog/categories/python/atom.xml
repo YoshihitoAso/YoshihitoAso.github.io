@@ -4,7 +4,7 @@
   <title><![CDATA[Category: python | /var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-27T13:21:43+09:00</updated>
+  <updated>2014-08-27T13:23:24+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -180,6 +180,9 @@ for data in col.find():
 <p>1) <a href="http://tnakamura.hatenablog.com/entry/20110602/python_scraping_pyquery">PyQuery で再びスクレイピング入門 - present</a></p>
 
 <p>2) GitHub: <a href="https://github.com/gawel/pyquery/">gawel/pyquery</a></p>
+
+<!-- more -->
+
 
 <h2>インストール</h2>
 
