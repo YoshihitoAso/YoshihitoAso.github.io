@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-27T15:35:51+09:00</updated>
+  <updated>2014-08-31T16:20:27+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,6 +12,361 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[YAPC Asia Tokyo 2014 (DAY2) 参加メモ]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/31/yapc-asia-tokyo-2014-day2/"/>
+    <updated>2014-08-31T14:05:06+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/31/yapc-asia-tokyo-2014-day2</id>
+    <content type="html"><![CDATA[<p>8/29-30に開催された<a href="http://yapcasia.org/2014/">YAPC::Asia Tokyo 2014</a> に参加して来ました。</p>
+
+<p>こちらは8/30分の参加メモです。</p>
+
+<p>※補足の参考資料等、まだ書ききれていない部分があるので、今後追記していきます。</p>
+
+<!-- more -->
+
+
+<h2>Dockerで遊んでみよっかー (Masahiro Nagano / LINE)</h2>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/38506505" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/kazeburo/docker-yapcasia-tokyo-2014" title="Dockerで遊んでみよっかー YAPC::Asia Tokyo 2014" target="_blank">Dockerで遊んでみよっかー YAPC::Asia Tokyo 2014</a> </strong> from <strong><a href="//www.slideshare.net/kazeburo" target="_blank">Masahiro Nagano</a></strong> </div></p>
+
+<p>DockerのコントロールはVagrantからやるのがオススメっぽいので、今度からはそうしようと思います。</p>
+
+<p>Dockerの「速い起動速度」と「揮発性」を意識して、色々な利用用途が考えられていますが、紹介されていたもので以下はなかなか良いですね。</p>
+
+<blockquote><p><a href="http://blog.linknode.net/article/1404955273">Docker コンテナで MySQL を使ったテストの高速化 - stfuawsc</a></p></blockquote>
+
+<p>自分自身、ちょっと触ってみてやめてしまった経緯があるのですが、ググってみると見ないうちにかなり色々とアイデアが出てきているので、もう一度利用方法を考えてみようと思ってます。</p>
+
+<blockquote><p><a href="http://blog.nomadscafe.jp/2014/06/plenvxbuildperl-build.html">plenvやxbuildで使っているperl-buildを信頼性の向上目指してアップデートしました - blog.nomadscafe.jp</a></p></blockquote>
+
+<h2>Google BigQuery で DWH 構築 (Naoya Ito / KAIZEN)</h2>
+
+<script async class="speakerdeck-embed" data-id="5c680810121d0132c86f02e2e0c65448" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+<p>満員御礼でした。注目度が高いんですね。</p>
+
+<p>ただ、現在既に使ったことがある人はあまりいなかったようなので、これから使うといった感じなんですかね？</p>
+
+<p>自分も使いどころを模索して（※単純なDWH的な使い方は普通にできるとは思う）、少し触ってみたり、<a href="http://www.amazon.co.jp/Google-BigQuery-Analytics-Jordan-Tigani-ebook/dp/B00JUUZIZI">&ldquo;Google BigQuery Analytics&rdquo;</a>を読んでみたりしています。</p>
+
+<p>9章の内部処理のところはまだ読んでないので、先にちょっとだけ話を聞くことが出来て良かったです。</p>
+
+<!--
+##Perl for Perl Mongers (YAPCに来た人は皆Perl Mongerでは？)
+資料： http://songmu.github.io/slides/yapc-asia2014/#0
+
+※まとめ中
+-->
+
+
+<h2>そんなにビッグでもないデータ処理手法の話 (tagomoris/LINE)</h2>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/38510397" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/tagomoris/handling-not-so-big-data" title="Handling not so big data" target="_blank">Handling not so big data</a> </strong> from <strong><a href="//www.slideshare.net/tagomoris" target="_blank">SATOSHI TAGOMORI</a></strong> </div></p>
+
+<p>データ解析の流れは大きく4つのフェーズに分けられます。</p>
+
+<ul>
+<li>収集</li>
+<li>加工・格納</li>
+<li>処理</li>
+<li>可視化</li>
+</ul>
+
+
+<p>今回の話は“処理（Processing）”の話でした。つまり、蓄えられているデータをどう処理するか？というところの話。</p>
+
+<p>Naoya Itoさんの話でも出てきていましたが、この分野は以前（5年前とか？）に比べて選択肢が多様化しており、目的別に様々なプロダクトが出てきています。</p>
+
+<ul>
+<li>Large Batch
+
+<ul>
+<li>Hadoop（＋Hive、Pig）、Spark、Tez</li>
+</ul>
+</li>
+<li>Short Batch
+
+<ul>
+<li>MPP Engines: BigQuery, Presto, Apache Impala</li>
+</ul>
+</li>
+<li>Stream Processing
+
+<ul>
+<li>Storm, Norikra</li>
+</ul>
+</li>
+</ul>
+
+
+<p>これらProcessingにおける多様化に関する話でした。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[YAPC Asia Tokyo 2014 (DAY1) 参加メモ]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/08/29/yapc-asia-tokyo-2014/"/>
+    <updated>2014-08-29T11:02:38+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/08/29/yapc-asia-tokyo-2014</id>
+    <content type="html"><![CDATA[<p>8/29-30に開催された<a href="http://yapcasia.org/2014/">YAPC::Asia Tokyo 2014</a> に参加して来ました。</p>
+
+<p>こちらは8/29分の参加メモです。</p>
+
+<p>※補足の参考資料等、まだ書ききれていない部分があるので、今後追記していきます。</p>
+
+<!-- more -->
+
+
+<h2>インフラエンジニア（狭義）は死んだ (Satoshi Suzuki / LINE)</h2>
+
+<p>（資料未公開）</p>
+
+<ul>
+<li>昨今のインフラエンジニアはコードが書ける・読めることが重要視されている</li>
+<li>Nagios、Fluentdなどなどインフラ・運用管理のコード化を行うためのOSSは様々存在するが、それらはプラグインなどを自前で書いたりすると最大限の恩恵を受けることが出来る。</li>
+<li>目の前にある「解決すべき問題・課題」は何か？それを解決するためにCode化する。</li>
+<li>インフラのコード化とはApache、MySQLのソースコードレベルのチューニングというわけではない。</li>
+<li>課題を見つけるためにCloudForecast、GrowthForecast・・・など監視の仕組みを構築することも必要。</li>
+<li>従来型のインフラエンジニアの需要が無くなるかというとそうではないだろう</li>
+<li>“インフラエンジニア”に対する先入観を無くす必要があるだろう（自分はインフラエンジニアだから・・・とか）</li>
+</ul>
+
+
+<h2>Go For Perl Mongers　(Daisuke Maki / LINE)</h2>
+
+<p>資料： <a href="http://go-talks.appspot.com/github.com/lestrrat/go-slides/2014-yapcasia-go-for-perl-mongers/main.slide#1">Go For Perl Mongers</a></p>
+
+<p>詳しいことは資料に書かれているので、以下は抜粋。</p>
+
+<p>GoはLLっぽいCだと思っている。ただ、コンパイル言語である。LLっぽいがそうではない。</p>
+
+<h4>例外とエラー</h4>
+
+<ul>
+<li>例外が存在しない。
+
+<ul>
+<li>panic(), recover()は基本的に使わない。</li>
+<li>エラーを戻り値に入れて早めにエラー処理（return/continue/break）するというのがセオリー。</li>
+<li>後続処理の大前提になっているような場合にはpanic()。ファイル存在チェックとか。</li>
+</ul>
+</li>
+</ul>
+
+
+<h4>構造体設計</h4>
+
+<ul>
+<li>基本はCのstruct</li>
+<li>オブジェクト指向ではない。型階層・継承がない。</li>
+<li>継承ではなく、委譲
+
+<ul>
+<li>考え方を変える(1) - 継承せずに小さな部品で合成する</li>
+<li>考え方を変える(2) - ラップする</li>
+<li>考え方を変える(3) - 類似構造体の関係性</li>
+</ul>
+</li>
+</ul>
+
+
+<h4>並行処理</h4>
+
+<ul>
+<li>goroutineはスレッドのイメージ。実行はgoのランタイム任せでどのスレッドでいつ動作するかは制御できない</li>
+<li>並行・並列処理は落とし穴だらけ。Goを使えば簡単にできるはウソ。</li>
+</ul>
+
+
+<h2>最近のウェブサービスの検索機能やその先の話　(Yusuke Yanbe/Hatena)</h2>
+
+<h4>はてなブックマークの検索の歴史について</h4>
+
+<ul>
+<li>2007 MySQL（LIKE検索）
+
+<ul>
+<li>特に問題はなかった</li>
+</ul>
+</li>
+<li>2008 サービス規模が拡大
+
+<ul>
+<li>過去のナレッジを有効に活用できるようにしたい</li>
+<li>Sedue を導入して過去エントリの全文検索が可能に</li>
+</ul>
+</li>
+<li>2009 関連エントリ
+
+<ul>
+<li>タグを元に関連エントリを表示できるようになった</li>
+<li>Senna で全文検索結果にまとめてタグづけなど可能に</li>
+<li>スケールしないので課金ユーザのみ</li>
+</ul>
+</li>
+<li>2011 検索機能が不調になる
+
+<ul>
+<li>保守を新たに結ぶか、OSS を利用するか</li>
+<li>Solrの利用を検討</li>
+</ul>
+</li>
+<li>2013 Elasticsearch検討
+
+<ul>
+<li>今は多くの場所で使っている</li>
+</ul>
+</li>
+</ul>
+
+
+<h4>Elasticsearchの特徴</h4>
+
+<ul>
+<li>複雑なクエリを記述できる
+
+<ul>
+<li>例: 自分のブクマから YAPC が入ってるエントリを検索</li>
+<li>例: お気に入りから YAPC エントリを検索</li>
+</ul>
+</li>
+<li>はてなブックマークカウンター
+
+<ul>
+<li>ウェブサイト全体のブックマーク数を表示する</li>
+<li>URL で検索して足し合わせていたが、aggregation で実現できる</li>
+</ul>
+</li>
+</ul>
+
+
+<h4>Elasticsearchをなぜ採用したか？</h4>
+
+<ul>
+<li>Query DSLの自由度で高度な企画要件にも耐えうる</li>
+<li>RDBMSだとスケールしにくい処理がオフロード可能</li>
+</ul>
+
+
+<h4>質疑応答</h4>
+
+<p>Q：オンラインでマッピングを変えるような時にどうしてるか？</p>
+
+<p>→　A：同じ構成の ES を用意して切り替える。ブルーグリーンデプロイメント。</p>
+
+<h2>Scala In Perl Company (hakobe/Hatena)</h2>
+
+<script async class="speakerdeck-embed" data-id="660d60b0116e0132712f66e2202859ae" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+
+<h4>継続的なソフトウェア進化</h4>
+
+<p>なぜPerlを使うか？</p>
+
+<ul>
+<li>少ない記述量で多くのことが出来る</li>
+<li>CPANライブラリが豊富　など</li>
+</ul>
+
+
+<p>10年の歳月が過ぎて状況が変わってきた。価値を生み出し続けるには、ソフトウェア進化を継続していかなければいけない。</p>
+
+<ul>
+<li>機能追加</li>
+<li>リニューアル</li>
+<li>パフォーマンス改善</li>
+</ul>
+
+
+<h4>「Perlで大規模開発」の難しさ</h4>
+
+<p>安全に機能のカスタマイズをしていくために様々な工夫を行ってきた。</p>
+
+<ul>
+<li>テストによる保護</li>
+<li>CI</li>
+<li>ソースコード解析</li>
+<li>開発フローの最適化　など</li>
+</ul>
+
+
+<p>それでもエラー検知に限界があるし、テストにそこまでコストをかけられないという現実問題がある。</p>
+
+<p>つまりPerlでは、「継続的なソフトウェア進化」における難しさがあった。</p>
+
+<h4>Scala採用の経緯</h4>
+
+<p>macherel（はてなの提供するサーバ管理サービス）という新サービスを開発することになった。</p>
+
+<p>言語の採用に自由度があったため、紆余曲折経てScalaを採用。</p>
+
+<h4>Scalaの良い/つらいと感じるところ</h4>
+
+<p>良いと感じるところ</p>
+
+<ul>
+<li>コードの変更が安心</li>
+<li>レビューが安心（機能に集中出来る）　など</li>
+</ul>
+
+
+<p>つらいと感じるところ</p>
+
+<ul>
+<li>コンパイル時間が長すぎる</li>
+<li>言語機能が豊富すぎて学習コストが高い　など</li>
+</ul>
+
+
+<!--
+## One layer down below. (Kang-min Liu/Booking.com)
+
+(資料未公開)
+
+※まとめ中
+
+hijkというHttpクライアントを作った
+perlコードで200行くらいのシンプルなクライアント
+Elasticsearchを利用するために作った
+
+hijkはlwpの12倍速いというBenchmark結果
+
+なぜ必要だったか
+とにかく性能を上げる
+Http/1.1のプロトコルで出来ることは様々
+app←→databaseで通信を行うことだけが必要であったため、必要な機能に絞った
+
+その他にも「必要な」OSSを作っている
+
+-->
+
+
+<h2>WHERE狙いのキー、ORDER BY狙いのキー (yoku0825)</h2>
+
+<iframe src="//www.slideshare.net/slideshow/embed_code/38479437" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/yoku0825/whereorder-by" title="Where狙いのキー、order by狙いのキー" target="_blank">Where狙いのキー、order by狙いのキー</a> </strong> from <strong><a href="//www.slideshare.net/yoku0825" target="_blank">yoku0825</a></strong> </div></p>
+
+<p>※RDBMSのSQL（INDEX）チューニングに関する話。資料に書いてある通りなので、追加のメモ等は特に無し。</p>
+
+<!--
+## Java For Perl Mongers Kazuhiro Osawa
+
+※まとめ中
+-->
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[PythonからHiveServer2に接続する方法]]></title>

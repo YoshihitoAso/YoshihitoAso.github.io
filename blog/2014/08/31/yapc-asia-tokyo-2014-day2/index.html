@@ -5,19 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>UbuntuにMongoDBをインストールする - /var/log/aso.log</title>
+  <title>YAPC Asia Tokyo 2014 (DAY2) 参加メモ - /var/log/aso.log</title>
   <meta name="author" content="Yoshihito Aso">
 
   
-  <meta name="description" content="UbuntuにMongoDBをインストールしたときのメモ。 ※参考情報：OSのバージョン 1
-2
-3
-4
-5
-$ cat /etc/lsb-release
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=12.10
-DISTRIB_CODENAME=quantal &hellip;">
+  <meta name="description" content="8/29-30に開催されたYAPC::Asia Tokyo 2014 に参加して来ました。 こちらは8/30分の参加メモです。 ※補足の参考資料等、まだ書ききれていない部分があるので、今後追記していきます。 Dockerで遊んでみよっかー (Masahiro Nagano / LINE) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,7 +18,7 @@ DISTRIB_CODENAME=quantal &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/">
+  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/2014/08/31/yapc-asia-tokyo-2014-day2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -81,7 +73,7 @@ DISTRIB_CODENAME=quantal &hellip;">
   
   <header>
     
-      <h1 class="entry-title">UbuntuにMongoDBをインストールする</h1>
+      <h1 class="entry-title">YAPC Asia Tokyo 2014 (DAY2) 参加メモ</h1>
     
     
       <p class="meta">
@@ -97,71 +89,104 @@ DISTRIB_CODENAME=quantal &hellip;">
   
 
 
-<time datetime="2014-08-20T15:54:27+09:00" pubdate data-updated="true">Aug 20<sup>th</sup>, 2014</time>
+<time datetime="2014-08-31T14:05:06+09:00" pubdate data-updated="true">Aug 31<sup>st</sup>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>UbuntuにMongoDBをインストールしたときのメモ。</p>
+<div class="entry-content"><p>8/29-30に開催された<a href="http://yapcasia.org/2014/">YAPC::Asia Tokyo 2014</a> に参加して来ました。</p>
 
-<p>※参考情報：OSのバージョン</p>
+<p>こちらは8/30分の参加メモです。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat /etc/lsb-release
-</span><span class='line'>DISTRIB_ID=Ubuntu
-</span><span class='line'>DISTRIB_RELEASE=12.10
-</span><span class='line'>DISTRIB_CODENAME=quantal
-</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.10"</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>MongoDBをインストール</h2>
-
-<p>公式ドキュメントの通り、以下の手順でインストール出来る</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-</span><span class='line'>$ echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
-</span><span class='line'>$ sudo apt-get update
-</span><span class='line'>$ sudo apt-get install mongodb-10gen</span></code></pre></td></tr></table></div></figure>
-
-
-
+<p>※補足の参考資料等、まだ書ききれていない部分があるので、今後追記していきます。</p>
 
 <!-- more -->
 
 
-<h2>MongoDBの起動</h2>
+<h2>Dockerで遊んでみよっかー (Masahiro Nagano / LINE)</h2>
 
-<p>起動停止は以下のコマンドで実施する。</p>
-
-<p>MongoDBのプロセスを開始</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongodb start</span></code></pre></td></tr></table></div></figure>
+<iframe src="//www.slideshare.net/slideshow/embed_code/38506505" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 
 
-<p>MongoDBのプロセスを停止</p>
+<p> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/kazeburo/docker-yapcasia-tokyo-2014" title="Dockerで遊んでみよっかー YAPC::Asia Tokyo 2014" target="_blank">Dockerで遊んでみよっかー YAPC::Asia Tokyo 2014</a> </strong> from <strong><a href="//www.slideshare.net/kazeburo" target="_blank">Masahiro Nagano</a></strong> </div></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongodb stop</span></code></pre></td></tr></table></div></figure>
+<p>DockerのコントロールはVagrantからやるのがオススメっぽいので、今度からはそうしようと思います。</p>
+
+<p>Dockerの「速い起動速度」と「揮発性」を意識して、色々な利用用途が考えられていますが、紹介されていたもので以下はなかなか良いですね。</p>
+
+<blockquote><p><a href="http://blog.linknode.net/article/1404955273">Docker コンテナで MySQL を使ったテストの高速化 - stfuawsc</a></p></blockquote>
+
+<p>自分自身、ちょっと触ってみてやめてしまった経緯があるのですが、ググってみると見ないうちにかなり色々とアイデアが出てきているので、もう一度利用方法を考えてみようと思ってます。</p>
+
+<blockquote><p><a href="http://blog.nomadscafe.jp/2014/06/plenvxbuildperl-build.html">plenvやxbuildで使っているperl-buildを信頼性の向上目指してアップデートしました - blog.nomadscafe.jp</a></p></blockquote>
+
+<h2>Google BigQuery で DWH 構築 (Naoya Ito / KAIZEN)</h2>
+
+<script async class="speakerdeck-embed" data-id="5c680810121d0132c86f02e2e0c65448" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
 
 
-<p>MongoDBのプロセスを再起動</p>
+<p>満員御礼でした。注目度が高いんですね。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongodb restart</span></code></pre></td></tr></table></div></figure>
+<p>ただ、現在既に使ったことがある人はあまりいなかったようなので、これから使うといった感じなんですかね？</p>
+
+<p>自分も使いどころを模索して（※単純なDWH的な使い方は普通にできるとは思う）、少し触ってみたり、<a href="http://www.amazon.co.jp/Google-BigQuery-Analytics-Jordan-Tigani-ebook/dp/B00JUUZIZI">&ldquo;Google BigQuery Analytics&rdquo;</a>を読んでみたりしています。</p>
+
+<p>9章の内部処理のところはまだ読んでないので、先にちょっとだけ話を聞くことが出来て良かったです。</p>
+
+<!--
+##Perl for Perl Mongers (YAPCに来た人は皆Perl Mongerでは？)
+資料： http://songmu.github.io/slides/yapc-asia2014/#0
+
+※まとめ中
+-->
 
 
+<h2>そんなにビッグでもないデータ処理手法の話 (tagomoris/LINE)</h2>
 
+<iframe src="//www.slideshare.net/slideshow/embed_code/38510397" width="425" height="355" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+
+<p> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/tagomoris/handling-not-so-big-data" title="Handling not so big data" target="_blank">Handling not so big data</a> </strong> from <strong><a href="//www.slideshare.net/tagomoris" target="_blank">SATOSHI TAGOMORI</a></strong> </div></p>
+
+<p>データ解析の流れは大きく4つのフェーズに分けられます。</p>
+
+<ul>
+<li>収集</li>
+<li>加工・格納</li>
+<li>処理</li>
+<li>可視化</li>
+</ul>
+
+
+<p>今回の話は“処理（Processing）”の話でした。つまり、蓄えられているデータをどう処理するか？というところの話。</p>
+
+<p>Naoya Itoさんの話でも出てきていましたが、この分野は以前（5年前とか？）に比べて選択肢が多様化しており、目的別に様々なプロダクトが出てきています。</p>
+
+<ul>
+<li>Large Batch
+
+<ul>
+<li>Hadoop（＋Hive、Pig）、Spark、Tez</li>
+</ul>
+</li>
+<li>Short Batch
+
+<ul>
+<li>MPP Engines: BigQuery, Presto, Apache Impala</li>
+</ul>
+</li>
+<li>Stream Processing
+
+<ul>
+<li>Storm, Norikra</li>
+</ul>
+</li>
+</ul>
+
+
+<p>これらProcessingにおける多様化に関する話でした。</p>
 </div>
 
 
@@ -184,12 +209,12 @@ DISTRIB_CODENAME=quantal &hellip;">
   
 
 
-<time datetime="2014-08-20T15:54:27+09:00" pubdate data-updated="true">Aug 20<sup>th</sup>, 2014</time>
+<time datetime="2014-08-31T14:05:06+09:00" pubdate data-updated="true">Aug 31<sup>st</sup>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/mongodb/'>mongodb</a>
+    <a class='category' href='/blog/categories/perl/'>perl</a>
   
 </span>
 
@@ -198,7 +223,7 @@ DISTRIB_CODENAME=quantal &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/" data-via="y_asoh" data-counturl="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yoshihitoaso.github.io/blog/2014/08/31/yapc-asia-tokyo-2014-day2/" data-via="y_asoh" data-counturl="http://yoshihitoaso.github.io/blog/2014/08/31/yapc-asia-tokyo-2014-day2/" >Tweet</a>
   
   
   
@@ -207,10 +232,8 @@ DISTRIB_CODENAME=quantal &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/08/20/cdh4-pseudo-distributed-mode/" title="Previous Post: Ubuntu上にCDH4（Hadoop）擬似分散モード環境を構築する （※おまけでHiveをインストール）">&laquo; Ubuntu上にCDH4（Hadoop）擬似分散モード環境を構築する （※おまけでHiveをインストール）</a>
+        <a class="basic-alignment left" href="/blog/2014/08/29/yapc-asia-tokyo-2014/" title="Previous Post: YAPC Asia Tokyo 2014 (DAY1) 参加メモ">&laquo; YAPC Asia Tokyo 2014 (DAY1) 参加メモ</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/08/25/ll-diver-2014/" title="Next Post: LL DIVER 参加メモ">LL DIVER 参加メモ &raquo;</a>
       
     </p>
   </footer>

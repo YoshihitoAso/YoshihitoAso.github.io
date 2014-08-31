@@ -5,19 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>UbuntuにMongoDBをインストールする - /var/log/aso.log</title>
+  <title>/var/log/aso.log</title>
   <meta name="author" content="Yoshihito Aso">
 
   
-  <meta name="description" content="UbuntuにMongoDBをインストールしたときのメモ。 ※参考情報：OSのバージョン 1
-2
-3
-4
-5
-$ cat /etc/lsb-release
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=12.10
-DISTRIB_CODENAME=quantal &hellip;">
+  <meta name="description" content=" メモは残してそのままにしていたが、こちらに書いておくことにする。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,7 +18,7 @@ DISTRIB_CODENAME=quantal &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/">
+  <link rel="canonical" href="http://yoshihitoaso.github.io/posts/2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -76,12 +68,15 @@ DISTRIB_CODENAME=quantal &hellip;">
 </nav> -->
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">UbuntuにMongoDBをインストールする</h1>
+      <h1 class="entry-title"><a href="/blog/2014/08/08/hadoop-conference-japan-2014-number-hcj2014/">Hadoop Conference Japan 2014　参加メモ #hcj2014</a></h1>
     
     
       <p class="meta">
@@ -97,127 +92,77 @@ DISTRIB_CODENAME=quantal &hellip;">
   
 
 
-<time datetime="2014-08-20T15:54:27+09:00" pubdate data-updated="true">Aug 20<sup>th</sup>, 2014</time>
+<time datetime="2014-08-08T21:49:15+09:00" pubdate data-updated="true">Aug 8<sup>th</sup>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>UbuntuにMongoDBをインストールしたときのメモ。</p>
+  <div class="entry-content"><p><img src="https://s3-ap-northeast-1.amazonaws.com/y-asoh.aws-demo.net/logo.png" title="hadoop" alt="hadoop" /></p>
 
-<p>※参考情報：OSのバージョン</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat /etc/lsb-release
-</span><span class='line'>DISTRIB_ID=Ubuntu
-</span><span class='line'>DISTRIB_RELEASE=12.10
-</span><span class='line'>DISTRIB_CODENAME=quantal
-</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.10"</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>MongoDBをインストール</h2>
-
-<p>公式ドキュメントの通り、以下の手順でインストール出来る</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-</span><span class='line'>$ echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
-</span><span class='line'>$ sudo apt-get update
-</span><span class='line'>$ sudo apt-get install mongodb-10gen</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!-- more -->
-
-
-<h2>MongoDBの起動</h2>
-
-<p>起動停止は以下のコマンドで実施する。</p>
-
-<p>MongoDBのプロセスを開始</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongodb start</span></code></pre></td></tr></table></div></figure>
-
-
-<p>MongoDBのプロセスを停止</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongodb stop</span></code></pre></td></tr></table></div></figure>
-
-
-<p>MongoDBのプロセスを再起動</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongodb restart</span></code></pre></td></tr></table></div></figure>
-
-
+<p>メモは残してそのままにしていたが、こちらに書いておくことにする。</p>
 
 </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/08/08/hadoop-conference-japan-2014-number-hcj2014/">Read on &rarr;</a>
+    </footer>
+  
 
 
-  <footer>
-    <p class="meta">
+    </article>
+  
+  
+    <article>
       
-  
-
-<span class="byline author vcard">Posted by <span class="fn">Yoshihito Aso</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-20T15:54:27+09:00" pubdate data-updated="true">Aug 20<sup>th</sup>, 2014</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/mongodb/'>mongodb</a>
-  
-</span>
-
-
-    </p>
+  <header>
     
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/" data-via="y_asoh" data-counturl="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/" >Tweet</a>
-  
-  
-  
-</div>
-
+      <h1 class="entry-title"><a href="/blog/2014/08/08/github-pages-plus-octopress/">GitHub Pages + Octopress</a></h1>
     
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2014/08/20/cdh4-pseudo-distributed-mode/" title="Previous Post: Ubuntu上にCDH4（Hadoop）擬似分散モード環境を構築する （※おまけでHiveをインストール）">&laquo; Ubuntu上にCDH4（Hadoop）擬似分散モード環境を構築する （※おまけでHiveをインストール）</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/08/25/ll-diver-2014/" title="Next Post: LL DIVER 参加メモ">LL DIVER 参加メモ &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-08T21:21:48+09:00" pubdate data-updated="true">Aug 8<sup>th</sup>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Octopress で　GitHub Pages を作ってみたのでメモ。</p>
 
 </div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/08/08/github-pages-plus-octopress/">Read on &rarr;</a>
+    </footer>
+  
 
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives/"> Archives </a>
+    
+    <a class="next" href="1">Newer &rarr;</a>
+    
+  </div>
+</div>
 <aside class="sidebar">
   
     <section id="titles">
@@ -284,7 +229,7 @@ DISTRIB_CODENAME=quantal &hellip;">
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   
   <a href="https://github.com/YoshihitoAso">@YoshihitoAso</a> on GitHub
@@ -316,7 +261,6 @@ DISTRIB_CODENAME=quantal &hellip;">
 
   
 </aside>
-
 
     </div>
   </div>

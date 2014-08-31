@@ -5,19 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>UbuntuにMongoDBをインストールする - /var/log/aso.log</title>
+  <title>Category: perl - /var/log/aso.log</title>
   <meta name="author" content="Yoshihito Aso">
 
   
-  <meta name="description" content="UbuntuにMongoDBをインストールしたときのメモ。 ※参考情報：OSのバージョン 1
-2
-3
-4
-5
-$ cat /etc/lsb-release
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=12.10
-DISTRIB_CODENAME=quantal &hellip;">
+  <meta name="description" content="Category: perl">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,7 +18,7 @@ DISTRIB_CODENAME=quantal &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/">
+  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/categories/perl/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -77,143 +69,49 @@ DISTRIB_CODENAME=quantal &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">UbuntuにMongoDBをインストールする</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-20T15:54:27+09:00" pubdate data-updated="true">Aug 20<sup>th</sup>, 2014</time>
-        
-      </p>
+    <h1 class="entry-title">Category: Perl</h1>
     
   </header>
-
-
-<div class="entry-content"><p>UbuntuにMongoDBをインストールしたときのメモ。</p>
-
-<p>※参考情報：OSのバージョン</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat /etc/lsb-release
-</span><span class='line'>DISTRIB_ID=Ubuntu
-</span><span class='line'>DISTRIB_RELEASE=12.10
-</span><span class='line'>DISTRIB_CODENAME=quantal
-</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.10"</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>MongoDBをインストール</h2>
-
-<p>公式ドキュメントの通り、以下の手順でインストール出来る</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-</span><span class='line'>$ echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
-</span><span class='line'>$ sudo apt-get update
-</span><span class='line'>$ sudo apt-get install mongodb-10gen</span></code></pre></td></tr></table></div></figure>
+  
+  <div id="blog-archives" class="category">
 
 
 
+  
+  <h2>2014</h2>
 
-<!-- more -->
+<article>
+  
+<h1><a href="/blog/2014/08/31/yapc-asia-tokyo-2014-day2/">YAPC Asia Tokyo 2014 (DAY2) 参加メモ</a></h1>
+<time datetime="2014-08-31T14:05:06+09:00" pubdate><span class='month'>Aug</span> <span class='day'>31</span> <span class='year'>2014</span></time>
 
-
-<h2>MongoDBの起動</h2>
-
-<p>起動停止は以下のコマンドで実施する。</p>
-
-<p>MongoDBのプロセスを開始</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongodb start</span></code></pre></td></tr></table></div></figure>
-
-
-<p>MongoDBのプロセスを停止</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongodb stop</span></code></pre></td></tr></table></div></figure>
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/perl/'>perl</a></span>
+</footer>
 
 
-<p>MongoDBのプロセスを再起動</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo service mongodb restart</span></code></pre></td></tr></table></div></figure>
+</article>
 
 
+
+<article>
+  
+<h1><a href="/blog/2014/08/29/yapc-asia-tokyo-2014/">YAPC Asia Tokyo 2014 (DAY1) 参加メモ</a></h1>
+<time datetime="2014-08-29T11:02:38+09:00" pubdate><span class='month'>Aug</span> <span class='day'>29</span> <span class='year'>2014</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/perl/'>perl</a></span>
+</footer>
+
+
+</article>
 
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Yoshihito Aso</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-20T15:54:27+09:00" pubdate data-updated="true">Aug 20<sup>th</sup>, 2014</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/mongodb/'>mongodb</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/" data-via="y_asoh" data-counturl="http://yoshihitoaso.github.io/blog/2014/08/20/ubuntu-mongo/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2014/08/20/cdh4-pseudo-distributed-mode/" title="Previous Post: Ubuntu上にCDH4（Hadoop）擬似分散モード環境を構築する （※おまけでHiveをインストール）">&laquo; Ubuntu上にCDH4（Hadoop）擬似分散モード環境を構築する （※おまけでHiveをインストール）</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2014/08/25/ll-diver-2014/" title="Next Post: LL DIVER 参加メモ">LL DIVER 参加メモ &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
 </div>
