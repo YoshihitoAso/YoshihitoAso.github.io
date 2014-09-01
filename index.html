@@ -9,7 +9,13 @@
   <meta name="author" content="Yoshihito Aso">
 
   
-  <meta name="description" content="前回（Ubuntu に JAVA7 (OpenJDK) をインストールする）は説明を割愛したが、既に他のバージョンのJavaが入っている場合もある。 ということで、JDKのバージョンを切り替える手順をメモ。 ">
+  <meta name="description" content="Ubuntu(12.04)環境にてrbenvでrubyのバージョンをコントロールする必要があったのでインストール手順と簡単な使い方をメモ。 ※参考情報：試したOSのバージョン 1
+2
+3
+4
+5
+# cat /etc/lsb-release
+DISTRIB_ID=Ubuntu &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +76,63 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/01/ubuntu-rbenv-install/">Ubuntuにrbenvをインストールする</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-01T18:45:33+09:00" pubdate data-updated="true">Sep 1<sup>st</sup>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ubuntu(12.04)環境にてrbenvでrubyのバージョンをコントロールする必要があったのでインストール手順と簡単な使い方をメモ。</p>
+
+<p>※参考情報：試したOSのバージョン</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># cat /etc/lsb-release
+</span><span class='line'>DISTRIB_ID=Ubuntu
+</span><span class='line'>DISTRIB_RELEASE=12.04
+</span><span class='line'>DISTRIB_CODENAME=precise
+</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.04.5 LTS"</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/09/01/ubuntu-rbenv-install/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -486,77 +549,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/20/ubuntu-mongo/">UbuntuにMongoDBをインストールする</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-20T15:54:27+09:00" pubdate data-updated="true">Aug 20<sup>th</sup>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>UbuntuにMongoDBをインストールしたときのメモ。</p>
-
-<p>※参考情報：OSのバージョン</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat /etc/lsb-release
-</span><span class='line'>DISTRIB_ID=Ubuntu
-</span><span class='line'>DISTRIB_RELEASE=12.10
-</span><span class='line'>DISTRIB_CODENAME=quantal
-</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.10"</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>MongoDBをインストール</h2>
-
-<p>公式ドキュメントの通り、以下の手順でインストール出来る</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
-</span><span class='line'>$ echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
-</span><span class='line'>$ sudo apt-get update
-</span><span class='line'>$ sudo apt-get install mongodb-10gen</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/08/20/ubuntu-mongo/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="2">&larr; Older</a>
@@ -606,6 +598,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/01/ubuntu-rbenv-install/">Ubuntuにrbenvをインストールする</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/01/change-the-java-version-on-ubuntu/">Javaのバージョンを切り替える（Ubuntu）</a>
       </li>
     
@@ -619,10 +615,6 @@
     
       <li class="post">
         <a href="/blog/2014/08/29/yapc-asia-tokyo-2014/">YAPC Asia Tokyo 2014 (DAY1) 参加メモ</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/27/pyhs2/">PythonからHiveServer2に接続する方法</a>
       </li>
     
   </ul>

@@ -5,19 +5,17 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Ubuntu に JAVA7 (OpenJDK) をインストールする - /var/log/aso.log</title>
+  <title>Ubuntuにrbenvをインストールする - /var/log/aso.log</title>
   <meta name="author" content="Yoshihito Aso">
 
   
-  <meta name="description" content="UbuntuにJDKをセットアップする方法をメモ。 ※参考情報：OSのバージョン 1
+  <meta name="description" content="Ubuntu(12.04)環境にてrbenvでrubyのバージョンをコントロールする必要があったのでインストール手順と簡単な使い方をメモ。 ※参考情報：試したOSのバージョン 1
 2
 3
 4
 5
-$ cat /etc/lsb-release
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=12.10
-DISTRIB_CODENAME=quantal &hellip;">
+# cat /etc/lsb-release
+DISTRIB_ID=Ubuntu &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -26,7 +24,7 @@ DISTRIB_CODENAME=quantal &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-jdk-install/">
+  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-rbenv-install/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -81,7 +79,7 @@ DISTRIB_CODENAME=quantal &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Ubuntu に JAVA7 (OpenJDK) をインストールする</h1>
+      <h1 class="entry-title">Ubuntuにrbenvをインストールする</h1>
     
     
       <p class="meta">
@@ -97,27 +95,27 @@ DISTRIB_CODENAME=quantal &hellip;">
   
 
 
-<time datetime="2014-09-01T13:48:57+09:00" pubdate data-updated="true">Sep 1<sup>st</sup>, 2014</time>
+<time datetime="2014-09-01T18:45:33+09:00" pubdate data-updated="true">Sep 1<sup>st</sup>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>UbuntuにJDKをセットアップする方法をメモ。</p>
+<div class="entry-content"><p>Ubuntu(12.04)環境にてrbenvでrubyのバージョンをコントロールする必要があったのでインストール手順と簡単な使い方をメモ。</p>
 
-<p>※参考情報：OSのバージョン</p>
+<p>※参考情報：試したOSのバージョン</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat /etc/lsb-release
+</pre></td><td class='code'><pre><code class=''><span class='line'># cat /etc/lsb-release
 </span><span class='line'>DISTRIB_ID=Ubuntu
-</span><span class='line'>DISTRIB_RELEASE=12.10
-</span><span class='line'>DISTRIB_CODENAME=quantal
-</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.10"</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>DISTRIB_RELEASE=12.04
+</span><span class='line'>DISTRIB_CODENAME=precise
+</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.04.5 LTS"</span></code></pre></td></tr></table></div></figure>
 
 
 
@@ -125,66 +123,70 @@ DISTRIB_CODENAME=quantal &hellip;">
 <!-- more -->
 
 
-<h2>OpenJDK のパッケージを検索</h2>
-
-<p>インストールを行うパッケージを検索する。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-cache search openjdk
-</span><span class='line'>...
-</span><span class='line'>openjdk-7-jdk - OpenJDK Development Kit (JDK)
-</span><span class='line'>openjdk-7-jre - OpenJDK Java runtime, using Hotspot JIT
-</span><span class='line'>openjdk-7-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
-</span><span class='line'>openjdk-7-jre-zero - Alternative JVM for OpenJDK, using Zero/Shark
-</span><span class='line'>openjdk-7-source - OpenJDK Development Kit (JDK) source files
-</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ここでは、openjdk-7-jdk、openjdk-7-jre、openjdk-7-source をインストールすることとする。</p>
+<blockquote><p>GitHub: <a href="https://github.com/sstephenson/rbenv">sstephenson/rbenv</a></p></blockquote>
 
 <h2>インストール</h2>
 
-<p>以下のとおりインストールする。</p>
+<p>必要なパッケージをインストールする</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install build-essential bison libreadline6-dev curl git-core zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev autoconf libncurses5-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rbenv、ruby-build を以下のように git clone する。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install openjdk-7-jdk
-</span><span class='line'>$ sudo apt-get install openjdk-7-jre
-</span><span class='line'>$ sudo apt-get install openjdk-7-source</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd
+</span><span class='line'>$ git clone git://github.com/sstephenson/rbenv.git .rbenv
+</span><span class='line'>$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>JAVA のバージョンを確認</h2>
+<h2>環境設定</h2>
 
-<p>バージョンの確認を行う。</p>
+<p>.profileに以下の設定を追加</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH="$HOME/.rbenv/bin:$PATH"
+</span><span class='line'>eval "$(rbenv init -)"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>設定変更を反映させる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ source ~/.profile</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>任意のバージョンのRubyをインストール</h2>
+
+<p>インストール可能なバージョンのリストは以下のコマンドで確認が可能。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv install --list</span></code></pre></td></tr></table></div></figure>
+
+
+<p>1.9.3の最新バージョン（2014/09/01時点で1.9.3-p547）をインストールしてみる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv install 1.9.3-p547</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rehashでrbenvを更新する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv rehash</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後に、インストールしたバージョンをglobalに指定する。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ java -version
-</span><span class='line'>java version "1.7.0_65"
-</span><span class='line'>OpenJDK Runtime Environment (IcedTea 2.5.1) (7u65-2.5.1-4ubuntu1~0.12.04.2)
-</span><span class='line'>OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
-</span><span class='line'>javac 1.7.0_65</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>環境変数の設定</h2>
-
-<p>環境変数（JAVA_HOME）の設定は以下のように行った。Pathは若干異なる場合があると思う。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo "export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64/\"" &gt;&gt; ~/.bashrc
-</span><span class='line'>$ source ~/.bashrc</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv global 1.9.3-p547
+</span><span class='line'>$ ruby --version
+</span><span class='line'>ruby 1.9.3p547 (2014-05-14 revision 45962) [x86_64-linux]</span></code></pre></td></tr></table></div></figure>
 
 </div>
 
@@ -208,12 +210,12 @@ DISTRIB_CODENAME=quantal &hellip;">
   
 
 
-<time datetime="2014-09-01T13:48:57+09:00" pubdate data-updated="true">Sep 1<sup>st</sup>, 2014</time>
+<time datetime="2014-09-01T18:45:33+09:00" pubdate data-updated="true">Sep 1<sup>st</sup>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/java/'>java</a>, <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
+    <a class='category' href='/blog/categories/rbenv/'>rbenv</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
   
 </span>
 
@@ -222,7 +224,7 @@ DISTRIB_CODENAME=quantal &hellip;">
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-jdk-install/" data-via="y_asoh" data-counturl="http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-jdk-install/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-rbenv-install/" data-via="y_asoh" data-counturl="http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-rbenv-install/" >Tweet</a>
   
   
   
@@ -231,10 +233,8 @@ DISTRIB_CODENAME=quantal &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/08/31/yapc-asia-tokyo-2014-day2/" title="Previous Post: YAPC Asia Tokyo 2014 (DAY2) 参加メモ">&laquo; YAPC Asia Tokyo 2014 (DAY2) 参加メモ</a>
+        <a class="basic-alignment left" href="/blog/2014/09/01/change-the-java-version-on-ubuntu/" title="Previous Post: Javaのバージョンを切り替える（Ubuntu）">&laquo; Javaのバージョンを切り替える（Ubuntu）</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/09/01/change-the-java-version-on-ubuntu/" title="Next Post: Javaのバージョンを切り替える（Ubuntu）">Javaのバージョンを切り替える（Ubuntu） &raquo;</a>
       
     </p>
   </footer>

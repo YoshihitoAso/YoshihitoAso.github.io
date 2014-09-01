@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-09-01T14:33:56+09:00</updated>
+  <updated>2014-09-01T18:50:03+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,6 +12,100 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntuにrbenvをインストールする]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-rbenv-install/"/>
+    <updated>2014-09-01T18:45:33+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-rbenv-install</id>
+    <content type="html"><![CDATA[<p>Ubuntu(12.04)環境にてrbenvでrubyのバージョンをコントロールする必要があったのでインストール手順と簡単な使い方をメモ。</p>
+
+<p>※参考情報：試したOSのバージョン</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># cat /etc/lsb-release
+</span><span class='line'>DISTRIB_ID=Ubuntu
+</span><span class='line'>DISTRIB_RELEASE=12.04
+</span><span class='line'>DISTRIB_CODENAME=precise
+</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.04.5 LTS"</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<blockquote><p>GitHub: <a href="https://github.com/sstephenson/rbenv">sstephenson/rbenv</a></p></blockquote>
+
+<h2>インストール</h2>
+
+<p>必要なパッケージをインストールする</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install build-essential bison libreadline6-dev curl git-core zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev autoconf libncurses5-dev</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rbenv、ruby-build を以下のように git clone する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd
+</span><span class='line'>$ git clone git://github.com/sstephenson/rbenv.git .rbenv
+</span><span class='line'>$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>環境設定</h2>
+
+<p>.profileに以下の設定を追加</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>export PATH="$HOME/.rbenv/bin:$PATH"
+</span><span class='line'>eval "$(rbenv init -)"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>設定変更を反映させる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ source ~/.profile</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>任意のバージョンのRubyをインストール</h2>
+
+<p>インストール可能なバージョンのリストは以下のコマンドで確認が可能。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv install --list</span></code></pre></td></tr></table></div></figure>
+
+
+<p>1.9.3の最新バージョン（2014/09/01時点で1.9.3-p547）をインストールしてみる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv install 1.9.3-p547</span></code></pre></td></tr></table></div></figure>
+
+
+<p>rehashでrbenvを更新する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv rehash</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後に、インストールしたバージョンをglobalに指定する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rbenv global 1.9.3-p547
+</span><span class='line'>$ ruby --version
+</span><span class='line'>ruby 1.9.3p547 (2014-05-14 revision 45962) [x86_64-linux]</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Javaのバージョンを切り替える（Ubuntu）]]></title>
