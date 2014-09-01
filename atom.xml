@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-09-01T13:53:18+09:00</updated>
+  <updated>2014-09-01T14:33:56+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Javaのバージョンを切り替える（Ubuntu）]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/09/01/change-the-java-version-on-ubuntu/"/>
+    <updated>2014-09-01T14:00:24+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/09/01/change-the-java-version-on-ubuntu</id>
+    <content type="html"><![CDATA[<p>前回（<a href="http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-jdk-install/">Ubuntu に JAVA7 (OpenJDK) をインストールする</a>）は説明を割愛したが、既に他のバージョンのJavaが入っている場合もある。</p>
+
+<p>ということで、JDKのバージョンを切り替える手順をメモ。</p>
+
+<!-- more -->
+
+
+<h2>JDKのバージョンを切り替える</h2>
+
+<p>例えば、既にJava6が入っているような場合を想定。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ java -version
+</span><span class='line'>java version "1.6.0_27"
+</span><span class='line'>OpenJDK Runtime Environment (IcedTea6 1.12.6) (6b27-1.12.6-1ubuntu0.12.04.4)
+</span><span class='line'>OpenJDK 64-Bit Server VM (build 20.0-b12, mixed mode)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>この状態で例えばJava7をインストールしてもその時点ではバージョンは切り替わらない。</p>
+
+<p>以下のようにしてバージョンを切り替える。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo update-alternatives --config java
+</span><span class='line'>There are 2 choices for the alternative java (providing /usr/bin/java).
+</span><span class='line'>
+</span><span class='line'>  Selection    Path                                            Priority   Status
+</span><span class='line'>------------------------------------------------------------
+</span><span class='line'>  0            /usr/lib/jvm/java-6-openjdk-amd64/jre/bin/java   1061      auto mode
+</span><span class='line'>  1            /usr/lib/jvm/java-6-openjdk-amd64/jre/bin/java   1061      manual mode
+</span><span class='line'>* 2            /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java   1051      manual mode
+</span><span class='line'>
+</span><span class='line'>Press enter to keep the current choice[*], or type selection number:</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後に番号の入力を要求されるので、使いたいバージョンを指定する。</p>
+
+<p>同様にjavacのバージョンを変更する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo update-alternatives --config javac</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>バージョンを確認</h2>
+
+<p>バージョンが切り替わっていることを確認する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ java -version
+</span><span class='line'>java version "1.7.0_65"
+</span><span class='line'>OpenJDK Runtime Environment (IcedTea 2.5.1) (7u65-2.5.1-4ubuntu1~0.12.04.2)
+</span><span class='line'>OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後に、JAVA_HOMEなど環境変数で旧バージョンのPathを指定しているところがあれば、適宜修正を行う。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ubuntu に JAVA7 (OpenJDK) をインストールする]]></title>

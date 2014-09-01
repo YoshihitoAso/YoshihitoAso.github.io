@@ -9,7 +9,15 @@
   <meta name="author" content="Yoshihito Aso">
 
   
-  <meta name="description" content="strace コマンドとは この辺が参考になる。 strace コマンドの使い方をまとめてみた - sonots:blog straceを利用して、プロセスが呼び出すシステムコールをトレースすることが出来る。 コマンドからトレース 実行コマンドが分かっている場合は、strace &hellip;">
+  <meta name="description" content="Ubuntuサーバ上にCDH4を擬似分散モードでインストールした時のメモ。 ※参考情報：OSのバージョン 1
+2
+3
+4
+5
+$ cat /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=12.10
+DISTRIB_CODENAME= &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,6 +78,63 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/08/20/cdh4-pseudo-distributed-mode/">Ubuntu上にCDH4（Hadoop）擬似分散モード環境を構築する （※おまけでHiveをインストール）</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-08-20T15:44:13+09:00" pubdate data-updated="true">Aug 20<sup>th</sup>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ubuntuサーバ上にCDH4を擬似分散モードでインストールした時のメモ。</p>
+
+<p>※参考情報：OSのバージョン</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat /etc/lsb-release
+</span><span class='line'>DISTRIB_ID=Ubuntu
+</span><span class='line'>DISTRIB_RELEASE=12.10
+</span><span class='line'>DISTRIB_CODENAME=quantal
+</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.10"</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/08/20/cdh4-pseudo-distributed-mode/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -290,6 +355,10 @@ JBossのtwiddleがある環境でロングランする事象があったので�
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/01/change-the-java-version-on-ubuntu/">Javaのバージョンを切り替える（Ubuntu）</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/01/ubuntu-jdk-install/">Ubuntu に JAVA7 (OpenJDK) をインストールする</a>
       </li>
     
@@ -303,10 +372,6 @@ JBossのtwiddleがある環境でロングランする事象があったので�
     
       <li class="post">
         <a href="/blog/2014/08/27/pyhs2/">PythonからHiveServer2に接続する方法</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/27/pymongo/">PythonからMongoDBを操作する</a>
       </li>
     
   </ul>
