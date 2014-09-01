@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-08-31T16:29:02+09:00</updated>
+  <updated>2014-09-01T13:53:18+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,6 +12,96 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu に JAVA7 (OpenJDK) をインストールする]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-jdk-install/"/>
+    <updated>2014-09-01T13:48:57+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-jdk-install</id>
+    <content type="html"><![CDATA[<p>UbuntuにJDKをセットアップする方法をメモ。</p>
+
+<p>※参考情報：OSのバージョン</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat /etc/lsb-release
+</span><span class='line'>DISTRIB_ID=Ubuntu
+</span><span class='line'>DISTRIB_RELEASE=12.10
+</span><span class='line'>DISTRIB_CODENAME=quantal
+</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.10"</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<h2>OpenJDK のパッケージを検索</h2>
+
+<p>インストールを行うパッケージを検索する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-cache search openjdk
+</span><span class='line'>...
+</span><span class='line'>openjdk-7-jdk - OpenJDK Development Kit (JDK)
+</span><span class='line'>openjdk-7-jre - OpenJDK Java runtime, using Hotspot JIT
+</span><span class='line'>openjdk-7-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
+</span><span class='line'>openjdk-7-jre-zero - Alternative JVM for OpenJDK, using Zero/Shark
+</span><span class='line'>openjdk-7-source - OpenJDK Development Kit (JDK) source files
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ここでは、openjdk-7-jdk、openjdk-7-jre、openjdk-7-source をインストールすることとする。</p>
+
+<h2>インストール</h2>
+
+<p>以下のとおりインストールする。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install openjdk-7-jdk
+</span><span class='line'>$ sudo apt-get install openjdk-7-jre
+</span><span class='line'>$ sudo apt-get install openjdk-7-source</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>JAVA のバージョンを確認</h2>
+
+<p>バージョンの確認を行う。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ java -version
+</span><span class='line'>java version "1.7.0_65"
+</span><span class='line'>OpenJDK Runtime Environment (IcedTea 2.5.1) (7u65-2.5.1-4ubuntu1~0.12.04.2)
+</span><span class='line'>OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
+</span><span class='line'>javac 1.7.0_65</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>環境変数の設定</h2>
+
+<p>環境変数（JAVA_HOME）の設定は以下のように行った。Pathは若干異なる場合があると思う。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo "export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64/\"" &gt;&gt; ~/.bashrc
+</span><span class='line'>$ source ~/.bashrc</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[YAPC Asia Tokyo 2014 (DAY2) 参加メモ]]></title>
