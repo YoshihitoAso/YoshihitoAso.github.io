@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: java | /var/log/aso.log]]></title>
-  <link href="http://yoshihitoaso.github.io/blog/categories/java/atom.xml" rel="self"/>
+  <title><![CDATA[Category: heroku | /var/log/aso.log]]></title>
+  <link href="http://yoshihitoaso.github.io/blog/categories/heroku/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
   <updated>2014-09-03T18:45:32+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
@@ -205,129 +205,6 @@ $ git push heroku master
 </code></p>
 
 <p>こんな感じで開発のサイクルを回していくっぽい。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Javaのバージョンを切り替える（Ubuntu）]]></title>
-    <link href="http://yoshihitoaso.github.io/blog/2014/09/01/change-the-java-version-on-ubuntu/"/>
-    <updated>2014-09-01T14:00:24+09:00</updated>
-    <id>http://yoshihitoaso.github.io/blog/2014/09/01/change-the-java-version-on-ubuntu</id>
-    <content type="html"><![CDATA[<p>前回（<a href="http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-jdk-install/">Ubuntu に JAVA7 (OpenJDK) をインストールする</a>）は説明を割愛したが、既に他のバージョンのJavaが入っている場合もある。</p>
-
-<p>ということで、JDKのバージョンを切り替える手順をメモ。</p>
-
-<!-- more -->
-
-
-<h2>JDKのバージョンを切り替える</h2>
-
-<p>例えば、既にJava6が入っているような場合を想定。</p>
-
-<pre><code>$ java -version
-java version "1.6.0_27"
-OpenJDK Runtime Environment (IcedTea6 1.12.6) (6b27-1.12.6-1ubuntu0.12.04.4)
-OpenJDK 64-Bit Server VM (build 20.0-b12, mixed mode)
-</code></pre>
-
-<p>この状態で例えばJava7をインストールしてもその時点ではバージョンは切り替わらない。</p>
-
-<p>以下のようにしてバージョンを切り替える。</p>
-
-<pre><code>$ sudo update-alternatives --config java
-There are 2 choices for the alternative java (providing /usr/bin/java).
-
-  Selection    Path                                            Priority   Status
-------------------------------------------------------------
-  0            /usr/lib/jvm/java-6-openjdk-amd64/jre/bin/java   1061      auto mode
-  1            /usr/lib/jvm/java-6-openjdk-amd64/jre/bin/java   1061      manual mode
-* 2            /usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java   1051      manual mode
-
-Press enter to keep the current choice[*], or type selection number:
-</code></pre>
-
-<p>最後に番号の入力を要求されるので、使いたいバージョンを指定する。</p>
-
-<p>同様にjavacのバージョンを変更する。
-<code>
-$ sudo update-alternatives --config javac
-</code></p>
-
-<h2>バージョンを確認</h2>
-
-<p>バージョンが切り替わっていることを確認する。
-<code>
-$ java -version
-java version "1.7.0_65"
-OpenJDK Runtime Environment (IcedTea 2.5.1) (7u65-2.5.1-4ubuntu1~0.12.04.2)
-OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
-</code></p>
-
-<p>最後に、JAVA_HOMEなど環境変数で旧バージョンのPathを指定しているところがあれば、適宜修正を行う。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Ubuntu に JAVA7 (OpenJDK) をインストールする]]></title>
-    <link href="http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-jdk-install/"/>
-    <updated>2014-09-01T13:48:57+09:00</updated>
-    <id>http://yoshihitoaso.github.io/blog/2014/09/01/ubuntu-jdk-install</id>
-    <content type="html"><![CDATA[<p>UbuntuにJDKをセットアップする方法をメモ。</p>
-
-<p>※参考情報：OSのバージョン</p>
-
-<pre><code>$ cat /etc/lsb-release
-DISTRIB_ID=Ubuntu
-DISTRIB_RELEASE=12.10
-DISTRIB_CODENAME=quantal
-DISTRIB_DESCRIPTION="Ubuntu 12.10"
-</code></pre>
-
-<!-- more -->
-
-
-<h2>OpenJDK のパッケージを検索</h2>
-
-<p>インストールを行うパッケージを検索する。
-<code>
-$ sudo apt-cache search openjdk
-...
-openjdk-7-jdk - OpenJDK Development Kit (JDK)
-openjdk-7-jre - OpenJDK Java runtime, using Hotspot JIT
-openjdk-7-jre-headless - OpenJDK Java runtime, using Hotspot JIT (headless)
-openjdk-7-jre-zero - Alternative JVM for OpenJDK, using Zero/Shark
-openjdk-7-source - OpenJDK Development Kit (JDK) source files
-...
-</code>
-ここでは、openjdk-7-jdk、openjdk-7-jre、openjdk-7-source をインストールすることとする。</p>
-
-<h2>インストール</h2>
-
-<p>以下のとおりインストールする。
-<code>
-$ sudo apt-get install openjdk-7-jdk
-$ sudo apt-get install openjdk-7-jre
-$ sudo apt-get install openjdk-7-source
-</code></p>
-
-<h2>JAVA のバージョンを確認</h2>
-
-<p>バージョンの確認を行う。
-<code>
-$ java -version
-java version "1.7.0_65"
-OpenJDK Runtime Environment (IcedTea 2.5.1) (7u65-2.5.1-4ubuntu1~0.12.04.2)
-OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
-javac 1.7.0_65
-</code></p>
-
-<h2>環境変数の設定</h2>
-
-<p>環境変数（JAVA_HOME）の設定は以下のように行った。Pathは若干異なる場合があると思う。
-<code>
-$ echo "export JAVA_HOME=/usr/lib/jvm/java-1.7.0-openjdk-amd64/\"" &gt;&gt; ~/.bashrc
-$ source ~/.bashrc
-</code></p>
 ]]></content>
   </entry>
   

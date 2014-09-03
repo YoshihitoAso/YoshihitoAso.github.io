@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-09-01T18:50:03+09:00</updated>
+  <updated>2014-09-03T18:45:32+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,6 +12,254 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[HerokuでJava appを作成してみる]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/09/03/heroku-java-app-demo/"/>
+    <updated>2014-09-03T18:33:19+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/09/03/heroku-java-app-demo</id>
+    <content type="html"><![CDATA[<p>Heroku上でJavaのアプリケーションを動かしたくなった。</p>
+
+<p>Heroku上でJavaアプリケーションを動かす方法についてまとめることにする。</p>
+
+<p>流れは公式のドキュメント（英語）のまま。</p>
+
+<blockquote><p>Getting Started with Java on Heroku</p>
+
+<p><a href="https://devcenter.heroku.com/articles/getting-started-with-java">https://devcenter.heroku.com/articles/getting-started-with-java</a></p></blockquote>
+
+<!-- more -->
+
+
+<h2>Introduction: イントロ</h2>
+
+<p>以下の準備が整っている前提。</p>
+
+<ul>
+<li>Herokuアカウントを作成する</li>
+<li>Maven3インストール済み開発環境</li>
+</ul>
+
+
+<h2>Set up: セットアップ</h2>
+
+<p>開発環境の初期セットアップを行っていく。</p>
+
+<h4>Heroku Toolbeltのインストール</h4>
+
+<p>ローカルの開発環境からHerokuをコントロールするために、開発環境にHerokuToolbeltをインストールする。</p>
+
+<p>ここの手順は環境によって異なる。以下はUbuntuの場合。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+</span><span class='line'>$ heroku login
+</span><span class='line'>Enter your Heroku credentials.
+</span><span class='line'>Email: hoge@hoge.com
+</span><span class='line'>Password (typing will be hidden):
+</span><span class='line'>Authentication successful.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>SSH公開鍵を登録する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh-keygen -t rsa
+</span><span class='line'>$ heroku keys:add ~/.ssh/id_rsa.pub</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>ログイン</h4>
+
+<p>Herokuにログインする。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ heroku login
+</span><span class='line'>Enter your Heroku credentials.
+</span><span class='line'>Email: hoge@hoge.com
+</span><span class='line'>Password (typing will be hidden):
+</span><span class='line'>Authentication successful.</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Prepare the app: サンプルアプリケーションの準備</h2>
+
+<p>Herokuが準備したサンプルアプリケーションをgit cloneしてくる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/heroku/java-getting-started.git
+</span><span class='line'>$ cd java-getting-started</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Deploy the app: Heroku上にサンプルアプリケーションをデプロイ</h2>
+
+<p>Heroku上にapp（プロジェクト）を作成する</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ heroku create
+</span><span class='line'>Creating ****... done, stack is cedar
+</span><span class='line'>http://****.herokuapp.com/ | git@heroku.com:****.git
+</span><span class='line'>Git remote heroku added</span></code></pre></td></tr></table></div></figure>
+
+
+<p>「****」の部分は作成時に自動的に付与される（あとからrenameも出来る）</p>
+
+<p>アプリケーションのデプロイは以下のように行う。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git push heroku master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>appの実行環境（インスタンス）を1つに制限する場合は、以下のコマンドを実行しておく。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ heroku ps:scale web=1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ここまですると、<a href="http://****.herokuapp.com/">http://****.herokuapp.com/</a> にサンプルアプリケーションが公開された状態になる。</p>
+
+<h2>View logs: ログを見る</h2>
+
+<p>アプリケーションのログは以下のコマンドで参照可能。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ heroku logs --tail</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Define a Procfile: Procfileを定義する</h2>
+
+<p>Procfileとは、Heroku appの動作方法（Process Model)を定義するファイル。</p>
+
+<blockquote><p>Process Types and the Procfile | Heroku Dev Center <a href="https://devcenter.heroku.com/articles/procfile">https://devcenter.heroku.com/articles/procfile</a></p></blockquote>
+
+<p>例えばRails3とかであれば、以下のように定義したりする。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>web: bundle exec rails server -p $PORT</span></code></pre></td></tr></table></div></figure>
+
+
+<p>その他のサンプルも上記のリンクに書かれているので、参考になると思う。</p>
+
+<p>サンプルアプリケーションでは以下のように定義する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>web: java $JAVA_OPTS -cp target/classes:target/dependency/* Main</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Declare app dependencies: appの依存関係を宣言する</h2>
+
+<p>Herokuはルートディレクトリにpom.xmlが存在することで、そのappがJavaであると判断する。</p>
+
+<p>appがデプロイされると（git push heroku master）、Herokuはpom.xmlに記載されている依存モジュールをインストールする（mvn clean install）</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   &lt;dependency&gt;
+</span><span class='line'>      &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+</span><span class='line'>      &lt;artifactId&gt;jetty-servlet&lt;/artifactId&gt;
+</span><span class='line'>      &lt;version&gt;7.6.0.v20120127&lt;/version&gt;
+</span><span class='line'>    &lt;/dependency&gt;
+</span><span class='line'>    &lt;dependency&gt;
+</span><span class='line'>      &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+</span><span class='line'>      &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+</span><span class='line'>      &lt;version&gt;2.5&lt;/version&gt;
+</span><span class='line'>    &lt;/dependency&gt;
+</span><span class='line'>    &lt;dependency&gt;
+</span><span class='line'>      &lt;groupId&gt;postgresql&lt;/groupId&gt;
+</span><span class='line'>      &lt;artifactId&gt;postgresql&lt;/artifactId&gt;
+</span><span class='line'>      &lt;version&gt;9.0-801.jdbc4&lt;/version&gt;
+</span><span class='line'>    &lt;/dependency&gt;
+</span><span class='line'>  &lt;/dependencies&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>また、別のファイルでsystem.propertiesというファイルがあるが、これによりJavaのバージョンを指定する。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>java.runtime.version=1.7</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ローカルディレクトリでアプリケーションを動かす場合も</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mvn clean install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でアプリケーション実行環境が整う。</p>
+
+<h2>Run the app locally: ローカル環境でappを実行する</h2>
+
+<p>Toolbeltの一部として提供されているForemanを利用する（ちなみにRubyの1.8系では動かなかったので注意）。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ foreman start web</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で、Procfileを読み込んでアプリケーションが起動する。</p>
+
+<p>ブラウザなどからlocalhost:5000 にアクセスするとサンプルアプリケーションが起動していることを確認出来る。</p>
+
+<h2>Push local changes: ローカルの変更内容を反映させる</h2>
+
+<p>pom.xmlに依存モジュールを追加した場合は、Local環境で</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ mvn clean install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>として、モジュールをインストールして直近化する。</p>
+
+<p>ソース修正を行ったら、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ foreman start web</span></code></pre></td></tr></table></div></figure>
+
+
+<p>して変更内容を確認する。</p>
+
+<p>テスト等実施してOKだったらローカルの Git Repository に変更内容を反映させる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git add .
+</span><span class='line'>$ git commit -m "Demo"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>GitHubなどリモートレポジトリが存在する場合は変更内容を反映させる。</p>
+
+<p>最後にgit push して本番サービスに反映させる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git push heroku master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こんな感じで開発のサイクルを回していくっぽい。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ubuntuにrbenvをインストールする]]></title>
