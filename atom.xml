@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-09-04T11:29:12+09:00</updated>
+  <updated>2014-09-04T18:25:11+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,6 +12,122 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu 12.04 にPostgreSQLをインストールする]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/09/04/ubuntu-postgresql/"/>
+    <updated>2014-09-04T18:06:09+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/09/04/ubuntu-postgresql</id>
+    <content type="html"><![CDATA[<p>開発環境の仮想サーバ（Ubuntu12.04）でPostgreSQLをインストールする必要があったのでメモ。</p>
+
+<p>開発環境ということもあり、細かい設定は抜きにして、とりあえず動くようになるまで。</p>
+
+<!-- more -->
+
+
+<h2>インストール</h2>
+
+<p>とりあえずapt-getでOK。バージョン9.1.14がインストールされた。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install postgresql
+</span><span class='line'>$ psql --version
+</span><span class='line'>psql (PostgreSQL) 9.1.14
+</span><span class='line'>contains support for command-line editing</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>データベース作成</h2>
+
+<p>最低限の設定を行う。</p>
+
+<h4>postgresユーザのパスワード変更</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo passwd postgres</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>管理者ユーザ（postgres）でログイン</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo su postgres</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>データベース作成</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ createdb &lt;データベース名&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>psqlコンソール</h2>
+
+<p>psqlでデータベースにログイン</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ psql &lt;データベース名&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>主なコマンド</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-- ログアウト
+</span><span class='line'>postgres=# \q
+</span><span class='line'>
+</span><span class='line'>-- データベース一覧
+</span><span class='line'>postgres=# \l
+</span><span class='line'>
+</span><span class='line'>-- データベース切り替え
+</span><span class='line'>postgres=# \c &lt;データベース名&gt;
+</span><span class='line'>
+</span><span class='line'>-- テーブル一覧
+</span><span class='line'>postgres=# \d
+</span><span class='line'>
+</span><span class='line'>-- roleの設定
+</span><span class='line'>postgres=# CREATE ROLE 名前 オプション;
+</span><span class='line'>
+</span><span class='line'>例）
+</span><span class='line'>postgres=# CREATE ROLE user_name WITH LOGIN PASSWORD 'password';</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>起動・停止・再起動</h2>
+
+<p>PostgreSQLの起動</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo /etc/init.d/postgresql start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>PostgreSQLの再起動</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo /etc/init.d/postgresql restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>PostgreSQLの停止</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo /etc/init.d/postgresql stop</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ubuntu 12.04 に Maven3 をインストールする]]></title>

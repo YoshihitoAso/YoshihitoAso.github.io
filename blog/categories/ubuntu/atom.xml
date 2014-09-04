@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ubuntu | /var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/blog/categories/ubuntu/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-09-04T11:29:12+09:00</updated>
+  <updated>2014-09-04T18:25:11+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -12,6 +12,94 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu 12.04 にPostgreSQLをインストールする]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/09/04/ubuntu-postgresql/"/>
+    <updated>2014-09-04T18:06:09+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/09/04/ubuntu-postgresql</id>
+    <content type="html"><![CDATA[<p>開発環境の仮想サーバ（Ubuntu12.04）でPostgreSQLをインストールする必要があったのでメモ。</p>
+
+<p>開発環境ということもあり、細かい設定は抜きにして、とりあえず動くようになるまで。</p>
+
+<!-- more -->
+
+
+<h2>インストール</h2>
+
+<p>とりあえずapt-getでOK。バージョン9.1.14がインストールされた。</p>
+
+<pre><code>$ sudo apt-get install postgresql
+$ psql --version
+psql (PostgreSQL) 9.1.14
+contains support for command-line editing
+</code></pre>
+
+<h2>データベース作成</h2>
+
+<p>最低限の設定を行う。</p>
+
+<h4>postgresユーザのパスワード変更</h4>
+
+<pre><code>$ sudo passwd postgres
+</code></pre>
+
+<h4>管理者ユーザ（postgres）でログイン</h4>
+
+<pre><code>$ sudo su postgres
+</code></pre>
+
+<h4>データベース作成</h4>
+
+<pre><code>$ createdb &lt;データベース名&gt;
+</code></pre>
+
+<h2>psqlコンソール</h2>
+
+<p>psqlでデータベースにログイン
+<code>
+$ psql &lt;データベース名&gt;
+</code></p>
+
+<h2>主なコマンド</h2>
+
+<pre><code>-- ログアウト
+postgres=# \q
+
+-- データベース一覧
+postgres=# \l
+
+-- データベース切り替え
+postgres=# \c &lt;データベース名&gt;
+
+-- テーブル一覧
+postgres=# \d
+
+-- roleの設定
+postgres=# CREATE ROLE 名前 オプション;
+
+例）
+postgres=# CREATE ROLE user_name WITH LOGIN PASSWORD 'password';
+</code></pre>
+
+<h2>起動・停止・再起動</h2>
+
+<p>PostgreSQLの起動</p>
+
+<pre><code>$ sudo /etc/init.d/postgresql start
+</code></pre>
+
+<p>PostgreSQLの再起動</p>
+
+<pre><code>$ sudo /etc/init.d/postgresql restart
+</code></pre>
+
+<p>PostgreSQLの停止</p>
+
+<pre><code>$ sudo /etc/init.d/postgresql stop
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ubuntuにrbenvをインストールする]]></title>

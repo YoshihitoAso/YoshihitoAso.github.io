@@ -5,11 +5,14 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="ja"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>straceでjavaプロセスの挙動を確認した - /var/log/aso.log</title>
+  <title>Ubuntu 12.04 にPostgreSQLをインストールする - /var/log/aso.log</title>
   <meta name="author" content="Yoshihito Aso">
 
   
-  <meta name="description" content="strace コマンドとは この辺が参考になる。 strace コマンドの使い方をまとめてみた - sonots:blog straceを利用して、プロセスが呼び出すシステムコールをトレースすることが出来る。 コマンドからトレース 実行コマンドが分かっている場合は、strace &hellip;">
+  <meta name="description" content="開発環境の仮想サーバ（Ubuntu12.04）でPostgreSQLをインストールする必要があったのでメモ。 開発環境ということもあり、細かい設定は抜きにして、とりあえず動くようになるまで。 インストール とりあえずapt-getでOK。バージョン9.1.14がインストールされた。 1
+2
+3
+4 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +21,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/2014/08/11/strace/">
+  <link rel="canonical" href="http://yoshihitoaso.github.io/blog/2014/09/04/ubuntu-postgresql/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -73,7 +76,7 @@
   
   <header>
     
-      <h1 class="entry-title">Straceでjavaプロセスの挙動を確認した</h1>
+      <h1 class="entry-title">Ubuntu 12.04 にPostgreSQLをインストールする</h1>
     
     
       <p class="meta">
@@ -89,64 +92,121 @@
   
 
 
-<time datetime="2014-08-11T11:03:25+09:00" pubdate data-updated="true">Aug 11<sup>th</sup>, 2014</time>
+<time datetime="2014-09-04T18:06:09+09:00" pubdate data-updated="true">Sep 4<sup>th</sup>, 2014</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><h2>strace コマンドとは</h2>
+<div class="entry-content"><p>開発環境の仮想サーバ（Ubuntu12.04）でPostgreSQLをインストールする必要があったのでメモ。</p>
 
-<p>この辺が参考になる。</p>
+<p>開発環境ということもあり、細かい設定は抜きにして、とりあえず動くようになるまで。</p>
 
-<blockquote><p><a href="http://blog.livedoor.jp/sonots/archives/18193659.html">strace コマンドの使い方をまとめてみた - sonots:blog</a></p></blockquote>
-
-<p>straceを利用して、プロセスが呼び出すシステムコールをトレースすることが出来る。</p>
-
-<h2>コマンドからトレース</h2>
-
-<p>実行コマンドが分かっている場合は、strace の後にトレースしたいコマンドを記述する感じ。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ strace [command]</span></code></pre></td></tr></table></div></figure>
+<!-- more -->
 
 
-<p>という感じで実行すれば良い。</p>
+<h2>インストール</h2>
 
-<h2>プロセスを指定</h2>
-
-<p>実行中プロセスをトレースしたい場合がある。pid 指定でトレースする。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>strace -p [pid]</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>具体例</h2>
-
-<p>例が渋すぎるが、最近実行した例を1つ。
-JBossのtwiddleがある環境でロングランする事象があったので調査した。
-切り分けし易いように、twiddle.shではなく、内部で実行しているjavaコマンドを直接実行してトレースした。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>strace -tt -f -s 1024 -o strace.log java -classpath /&lt;任意のpath&gt;/twiddle.jar:/&lt;任意のpath&gt;/jbossall-client.jar:/&lt;任意のpath&gt;/jboss-common.jar:/&lt;任意のpath&gt;/getopt.jar:/&lt;任意のpath&gt;/log4j.jar:/&lt;任意のpath&gt;/jboss-jmx.jar:/&lt;任意のpath&gt;/dom4j-1.5.jar org.jboss.console.twiddle.Twiddle -s &lt;任意のurlやip&gt;:&lt;任意のport&gt; &lt;command&gt; [ command_arguments</span></code></pre></td></tr></table></div></figure>
-
-
-<p>オプションが幾つかついているが補足しておくと、</p>
+<p>とりあえずapt-getでOK。バージョン9.1.14がインストールされた。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>-tt: マイクロ秒単位で表示
-</span><span class='line'>-f: 内部でスレッドが切れている場合、スレッドまでトレースする場合
-</span><span class='line'>-s: 1行あたり表示される文字数を変更する。（デフォルトは32文字）
-</span><span class='line'>-o: ファイルに出力するオプション</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install postgresql
+</span><span class='line'>$ psql --version
+</span><span class='line'>psql (PostgreSQL) 9.1.14
+</span><span class='line'>contains support for command-line editing</span></code></pre></td></tr></table></div></figure>
 
 
-<p>といった感じ。</p>
+<h2>データベース作成</h2>
 
-<p>-f オプションの場合、別プロセスのトレース結果が同一ファイルに出力される。別ファイルにしたい場合は、-ff オプションにすれば良い。</p>
+<p>最低限の設定を行う。</p>
+
+<h4>postgresユーザのパスワード変更</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo passwd postgres</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>管理者ユーザ（postgres）でログイン</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo su postgres</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>データベース作成</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ createdb &lt;データベース名&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>psqlコンソール</h2>
+
+<p>psqlでデータベースにログイン</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ psql &lt;データベース名&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>主なコマンド</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>-- ログアウト
+</span><span class='line'>postgres=# \q
+</span><span class='line'>
+</span><span class='line'>-- データベース一覧
+</span><span class='line'>postgres=# \l
+</span><span class='line'>
+</span><span class='line'>-- データベース切り替え
+</span><span class='line'>postgres=# \c &lt;データベース名&gt;
+</span><span class='line'>
+</span><span class='line'>-- テーブル一覧
+</span><span class='line'>postgres=# \d
+</span><span class='line'>
+</span><span class='line'>-- roleの設定
+</span><span class='line'>postgres=# CREATE ROLE 名前 オプション;
+</span><span class='line'>
+</span><span class='line'>例）
+</span><span class='line'>postgres=# CREATE ROLE user_name WITH LOGIN PASSWORD 'password';</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>起動・停止・再起動</h2>
+
+<p>PostgreSQLの起動</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo /etc/init.d/postgresql start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>PostgreSQLの再起動</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo /etc/init.d/postgresql restart</span></code></pre></td></tr></table></div></figure>
+
+
+<p>PostgreSQLの停止</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo /etc/init.d/postgresql stop</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -169,12 +229,12 @@ JBossのtwiddleがある環境でロングランする事象があったので�
   
 
 
-<time datetime="2014-08-11T11:03:25+09:00" pubdate data-updated="true">Aug 11<sup>th</sup>, 2014</time>
+<time datetime="2014-09-04T18:06:09+09:00" pubdate data-updated="true">Sep 4<sup>th</sup>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/linux/'>linux</a>
+    <a class='category' href='/blog/categories/postgresql/'>postgresql</a>, <a class='category' href='/blog/categories/ubuntu/'>ubuntu</a>
   
 </span>
 
@@ -183,7 +243,7 @@ JBossのtwiddleがある環境でロングランする事象があったので�
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yoshihitoaso.github.io/blog/2014/08/11/strace/" data-via="y_asoh" data-counturl="http://yoshihitoaso.github.io/blog/2014/08/11/strace/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://yoshihitoaso.github.io/blog/2014/09/04/ubuntu-postgresql/" data-via="y_asoh" data-counturl="http://yoshihitoaso.github.io/blog/2014/09/04/ubuntu-postgresql/" >Tweet</a>
   
   
   
@@ -192,10 +252,8 @@ JBossのtwiddleがある環境でロングランする事象があったので�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/08/08/hadoop-conference-japan-2014-number-hcj2014/" title="Previous Post: Hadoop Conference Japan 2014　参加メモ #hcj2014">&laquo; Hadoop Conference Japan 2014　参加メモ #hcj2014</a>
+        <a class="basic-alignment left" href="/blog/2014/09/04/ubuntu-maven3/" title="Previous Post: Ubuntu 12.04 に Maven3 をインストールする">&laquo; Ubuntu 12.04 に Maven3 をインストールする</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/08/20/cdh4-pseudo-distributed-mode/" title="Next Post: Ubuntu上にCDH4（Hadoop）擬似分散モード環境を構築する （※おまけでHiveをインストール）">Ubuntu上にCDH4（Hadoop）擬似分散モード環境を構築する （※おまけでHiveをインストール） &raquo;</a>
       
     </p>
   </footer>
