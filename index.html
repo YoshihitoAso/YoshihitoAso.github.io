@@ -9,7 +9,15 @@
   <meta name="author" content="Yoshihito Aso">
 
   
-  <meta name="description" content="Heroku上でJavaのアプリケーションを動かしたくなった。 Heroku上でJavaアプリケーションを動かす方法についてまとめることにする。 流れは公式のドキュメント（英語）のまま。 Getting Started with Java on Heroku https://devcenter. &hellip;">
+  <meta name="description" content="Ubuntu 12.04 に Maven3 (※2ではなく3)をインストールした時のメモ。 ※参考：OS情報 1
+2
+3
+4
+5
+$ cat /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=12.04
+DISTRIB_CODENAME= &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -76,6 +84,63 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/09/04/ubuntu-maven3/">Ubuntu 12.04 に Maven3 をインストールする</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-04T11:00:12+09:00" pubdate data-updated="true">Sep 4<sup>th</sup>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ubuntu 12.04 に Maven3 (※2ではなく3)をインストールした時のメモ。</p>
+
+<p>※参考：OS情報</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat /etc/lsb-release
+</span><span class='line'>DISTRIB_ID=Ubuntu
+</span><span class='line'>DISTRIB_RELEASE=12.04
+</span><span class='line'>DISTRIB_CODENAME=precise
+</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.04.5 LTS"</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2014/09/04/ubuntu-maven3/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/09/03/heroku-java-app-demo/">HerokuでJava Appを作成してみる</a></h1>
     
     
@@ -101,9 +166,9 @@
 
   <div class="entry-content"><p>Heroku上でJavaのアプリケーションを動かしたくなった。</p>
 
-<p>Heroku上でJavaアプリケーションを動かす方法についてまとめることにする。</p>
+<p>公式チュートリアルに沿って流れを確認してみたのでメモ。</p>
 
-<p>流れは公式のドキュメント（英語）のまま。</p>
+<p>だいたいの流れは公式のドキュメント（英語）のまま。</p>
 
 <blockquote><p>Getting Started with Java on Heroku</p>
 
@@ -502,51 +567,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/08/25/pyquery/">pyqueryでWebスクレイピング</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-08-25T20:15:05+09:00" pubdate data-updated="true">Aug 25<sup>th</sup>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>pyqueryを使ってスクレイピングしてみた時のメモ。以下のサイトを参考にした。</p>
-
-<p>1) <a href="http://tnakamura.hatenablog.com/entry/20110602/python_scraping_pyquery">PyQuery で再びスクレイピング入門 - present</a></p>
-
-<p>2) GitHub: <a href="https://github.com/gawel/pyquery/">gawel/pyquery</a></p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2014/08/25/pyquery/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="2">&larr; Older</a>
@@ -596,6 +616,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/04/ubuntu-maven3/">Ubuntu 12.04 に Maven3 をインストールする</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/09/03/heroku-java-app-demo/">HerokuでJava appを作成してみる</a>
       </li>
     
@@ -609,10 +633,6 @@
     
       <li class="post">
         <a href="/blog/2014/09/01/ubuntu-jdk-install/">Ubuntu に JAVA7 (OpenJDK) をインストールする</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/08/31/yapc-asia-tokyo-2014-day2/">YAPC Asia Tokyo 2014 (DAY2) 参加メモ</a>
       </li>
     
   </ul>

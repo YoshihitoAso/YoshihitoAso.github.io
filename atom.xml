@@ -4,7 +4,7 @@
   <title><![CDATA[/var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-09-03T18:45:32+09:00</updated>
+  <updated>2014-09-04T11:29:12+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -14,15 +14,87 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Ubuntu 12.04 に Maven3 をインストールする]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/09/04/ubuntu-maven3/"/>
+    <updated>2014-09-04T11:00:12+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/09/04/ubuntu-maven3</id>
+    <content type="html"><![CDATA[<p>Ubuntu 12.04 に Maven3 (※2ではなく3)をインストールした時のメモ。</p>
+
+<p>※参考：OS情報</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat /etc/lsb-release
+</span><span class='line'>DISTRIB_ID=Ubuntu
+</span><span class='line'>DISTRIB_RELEASE=12.04
+</span><span class='line'>DISTRIB_CODENAME=precise
+</span><span class='line'>DISTRIB_DESCRIPTION="Ubuntu 12.04.5 LTS"</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!-- more -->
+
+
+<p>バージョンは12.04でDistributionはpreciseである。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ apt-cache policy maven
+</span><span class='line'>maven:
+</span><span class='line'>  Installed: 3.0.4-2
+</span><span class='line'>  Candidate: 3.0.4-2
+</span><span class='line'>  Version table:
+</span><span class='line'> *** 3.0.4-2 0
+</span><span class='line'>        500 http://archive.ubuntu.com/ubuntu/ precise/universe amd64 Packages
+</span><span class='line'>        100 /var/lib/dpkg/status</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記の通り、要はdefaultはmaven3のようだ。</p>
+
+<p>つまりこのバージョンでは単純に、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get inatall maven</span></code></pre></td></tr></table></div></figure>
+
+
+<p>でOKということのようだ。</p>
+
+<h4>※補足</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ apt-cache policy maven
+</span><span class='line'>....
+</span><span class='line'>maven - Java software project management and comprehension tool
+</span><span class='line'>maven-debian-helper - Helper tools for building Debian packages with Maven
+</span><span class='line'>maven2 - Java software project management and comprehension tool</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[HerokuでJava appを作成してみる]]></title>
     <link href="http://yoshihitoaso.github.io/blog/2014/09/03/heroku-java-app-demo/"/>
     <updated>2014-09-03T18:33:19+09:00</updated>
     <id>http://yoshihitoaso.github.io/blog/2014/09/03/heroku-java-app-demo</id>
     <content type="html"><![CDATA[<p>Heroku上でJavaのアプリケーションを動かしたくなった。</p>
 
-<p>Heroku上でJavaアプリケーションを動かす方法についてまとめることにする。</p>
+<p>公式チュートリアルに沿って流れを確認してみたのでメモ。</p>
 
-<p>流れは公式のドキュメント（英語）のまま。</p>
+<p>だいたいの流れは公式のドキュメント（英語）のまま。</p>
 
 <blockquote><p>Getting Started with Java on Heroku</p>
 
@@ -141,7 +213,9 @@
 
 <p>Procfileとは、Heroku appの動作方法（Process Model)を定義するファイル。</p>
 
-<blockquote><p>Process Types and the Procfile | Heroku Dev Center <a href="https://devcenter.heroku.com/articles/procfile">https://devcenter.heroku.com/articles/procfile</a></p></blockquote>
+<blockquote><p>Process Types and the Procfile | Heroku Dev Center</p>
+
+<p><a href="https://devcenter.heroku.com/articles/procfile">https://devcenter.heroku.com/articles/procfile</a></p></blockquote>
 
 <p>例えばRails3とかであれば、以下のように定義したりする。</p>
 

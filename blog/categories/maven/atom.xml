@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: maven | /var/log/aso.log]]></title>
+  <link href="http://yoshihitoaso.github.io/blog/categories/maven/atom.xml" rel="self"/>
+  <link href="http://yoshihitoaso.github.io/"/>
+  <updated>2014-09-04T11:29:12+09:00</updated>
+  <id>http://yoshihitoaso.github.io/</id>
+  <author>
+    <name><![CDATA[Yoshihito Aso]]></name>
+    <email><![CDATA[yoshihito.asoh@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ubuntu 12.04 に Maven3 をインストールする]]></title>
+    <link href="http://yoshihitoaso.github.io/blog/2014/09/04/ubuntu-maven3/"/>
+    <updated>2014-09-04T11:00:12+09:00</updated>
+    <id>http://yoshihitoaso.github.io/blog/2014/09/04/ubuntu-maven3</id>
+    <content type="html"><![CDATA[<p>Ubuntu 12.04 に Maven3 (※2ではなく3)をインストールした時のメモ。</p>
+
+<p>※参考：OS情報
+<code>
+$ cat /etc/lsb-release
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=12.04
+DISTRIB_CODENAME=precise
+DISTRIB_DESCRIPTION="Ubuntu 12.04.5 LTS"
+</code></p>
+
+<!-- more -->
+
+
+<p>バージョンは12.04でDistributionはpreciseである。</p>
+
+<pre><code>$ apt-cache policy maven
+maven:
+  Installed: 3.0.4-2
+  Candidate: 3.0.4-2
+  Version table:
+ *** 3.0.4-2 0
+        500 http://archive.ubuntu.com/ubuntu/ precise/universe amd64 Packages
+        100 /var/lib/dpkg/status
+</code></pre>
+
+<p>上記の通り、要はdefaultはmaven3のようだ。</p>
+
+<p>つまりこのバージョンでは単純に、
+<code>
+$ sudo apt-get inatall maven
+</code>
+でOKということのようだ。</p>
+
+<h4>※補足</h4>
+
+<pre><code>$ apt-cache policy maven
+....
+maven - Java software project management and comprehension tool
+maven-debian-helper - Helper tools for building Debian packages with Maven
+maven2 - Java software project management and comprehension tool
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

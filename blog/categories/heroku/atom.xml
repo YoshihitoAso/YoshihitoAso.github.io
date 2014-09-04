@@ -4,7 +4,7 @@
   <title><![CDATA[Category: heroku | /var/log/aso.log]]></title>
   <link href="http://yoshihitoaso.github.io/blog/categories/heroku/atom.xml" rel="self"/>
   <link href="http://yoshihitoaso.github.io/"/>
-  <updated>2014-09-03T18:45:32+09:00</updated>
+  <updated>2014-09-04T11:29:12+09:00</updated>
   <id>http://yoshihitoaso.github.io/</id>
   <author>
     <name><![CDATA[Yoshihito Aso]]></name>
@@ -20,9 +20,9 @@
     <id>http://yoshihitoaso.github.io/blog/2014/09/03/heroku-java-app-demo</id>
     <content type="html"><![CDATA[<p>Heroku上でJavaのアプリケーションを動かしたくなった。</p>
 
-<p>Heroku上でJavaアプリケーションを動かす方法についてまとめることにする。</p>
+<p>公式チュートリアルに沿って流れを確認してみたのでメモ。</p>
 
-<p>流れは公式のドキュメント（英語）のまま。</p>
+<p>だいたいの流れは公式のドキュメント（英語）のまま。</p>
 
 <blockquote><p>Getting Started with Java on Heroku</p>
 
@@ -118,7 +118,9 @@ $ heroku ps:scale web=1
 
 <p>Procfileとは、Heroku appの動作方法（Process Model)を定義するファイル。</p>
 
-<blockquote><p>Process Types and the Procfile | Heroku Dev Center <a href="https://devcenter.heroku.com/articles/procfile">https://devcenter.heroku.com/articles/procfile</a></p></blockquote>
+<blockquote><p>Process Types and the Procfile | Heroku Dev Center</p>
+
+<p><a href="https://devcenter.heroku.com/articles/procfile">https://devcenter.heroku.com/articles/procfile</a></p></blockquote>
 
 <p>例えばRails3とかであれば、以下のように定義したりする。
 <code>
